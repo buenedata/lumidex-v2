@@ -1,0 +1,350 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Aurora Crimson Design Tokens */
+  --bg: #0f1220;            /* page background (near-black navy) */
+  --panel: #171a2b;         /* cards/panels */
+  --panel-2: #1e2236;       /* elevated panels/hover */
+  --text: #e6e7ee;          /* primary text */
+  --muted: #a0a3b1;         /* secondary text */
+  --border: #262a41;        /* subtle borders */
+
+  --brand: #ef4444;         /* crimson */
+  --brand-2: #8b5cf6;       /* purple */
+  --accent: #f97316;        /* ember (sparingly) */
+
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger:  #ef4444;
+
+  --ring: rgba(139, 92, 246, .45);   /* focus ring color */
+  --shadow: 0 10px 25px rgba(0,0,0,.35);
+
+  /* gradient for CTAs / highlights */
+  --grad-aurora: linear-gradient(135deg, #ef4444 0%, #8b5cf6 100%);
+}
+
+@layer base {
+  /* Global Base Styles */
+  html, body { 
+    height: 100%; 
+    background: var(--bg); 
+    color: var(--text); 
+  }
+  
+  * { 
+    @apply antialiased; 
+  }
+  
+  a { 
+    @apply text-text transition-colors hover:text-brand; 
+  }
+  
+  ::selection { 
+    background: rgba(139,92,246,.35); 
+    color: white; 
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--panel);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--muted);
+  }
+}
+
+@layer components {
+  /* Panel Components */
+  .panel { 
+    @apply bg-panel rounded-2xl border border-border shadow-soft; 
+  }
+  
+  .panel-hover { 
+    @apply hover:bg-panel2 transition-colors duration-150; 
+  }
+
+  /* Button Components */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-xl px-4 py-2 font-medium border border-border transition-all duration-150 focus:outline-none;
+  }
+  
+  .btn-ghost { 
+    @apply bg-transparent hover:bg-panel2 text-text hover:text-white; 
+  }
+  
+  .btn-primary {
+    background-image: var(--grad-aurora);
+    @apply text-white border-transparent shadow-soft hover:opacity-95 hover:shadow-lg transform hover:-translate-y-0.5;
+  }
+
+  .btn-secondary {
+    @apply bg-panel2 border-border text-text hover:bg-panel;
+  }
+  
+  .btn-secondary:hover {
+    border-color: rgba(139, 92, 246, 0.5);
+  }
+
+  .btn-sm {
+    @apply px-3 py-1.5 text-sm;
+  }
+
+  .btn-lg {
+    @apply px-6 py-3 text-base;
+  }
+
+  /* Form Components */
+  .field { 
+    @apply bg-panel2 border border-border rounded-xl px-3 py-2 text-text placeholder:text-muted placeholder:opacity-60 focus:border-brand2 focus:outline-none transition-colors duration-150; 
+  }
+
+  .field:focus {
+    box-shadow: 0 0 0 3px var(--ring);
+  }
+
+  /* Tag/Badge Components */
+  .pill { 
+    @apply rounded-full px-3 py-1 text-sm bg-panel2 border border-border text-text; 
+  }
+
+  .pill-brand {
+    background-image: var(--grad-aurora);
+    @apply text-white border-transparent;
+  }
+
+  .pill-success {
+    @apply text-success;
+    background-color: rgba(34, 197, 94, 0.1);
+    border-color: rgba(34, 197, 94, 0.2);
+  }
+
+  .pill-warning {
+    @apply text-warning;
+    background-color: rgba(245, 158, 11, 0.1);
+    border-color: rgba(245, 158, 11, 0.2);
+  }
+
+  .pill-danger {
+    @apply text-danger;
+    background-color: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.2);
+  }
+
+  /* Focus Management */
+  .ring-focus { 
+    box-shadow: 0 0 0 4px var(--ring); 
+  }
+
+  /* Card Components */
+  .card {
+    @apply panel panel-hover;
+  }
+
+  .card-interactive {
+    @apply card cursor-pointer transform transition-all duration-150 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-focus;
+  }
+
+  /* Gradient Backgrounds */
+  .bg-aurora {
+    background-image: var(--grad-aurora);
+  }
+
+  .bg-aurora-radial {
+    background: radial-gradient(ellipse at top, var(--brand)/15%, transparent 60%);
+  }
+
+  /* Typography Variants */
+  .text-gradient {
+    background-image: var(--grad-aurora);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Loading States */
+  .skeleton {
+    @apply animate-pulse bg-panel2 rounded;
+  }
+
+  /* Navigation Active States */
+  .nav-active {
+    @apply relative;
+  }
+
+  .nav-active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-image: var(--grad-aurora);
+    border-radius: 1px;
+  }
+
+  /* Mobile Menu */
+  .mobile-menu {
+    @apply panel border-0 shadow-lg;
+  }
+
+  /* Stat Tiles */
+  .stat-tile {
+    @apply panel p-6 relative overflow-hidden;
+  }
+
+  .stat-tile::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at top, var(--brand)/8%, transparent 50%);
+    pointer-events: none;
+  }
+
+  /* Form Groups */
+  .form-group {
+    @apply space-y-1;
+  }
+
+  .form-label {
+    @apply text-sm font-medium text-muted;
+  }
+
+  .form-error {
+    @apply text-sm text-danger;
+  }
+
+  /* Empty States */
+  .empty-state {
+    @apply text-center py-12 px-4;
+  }
+
+  .empty-state-icon {
+    @apply w-16 h-16 mx-auto mb-4 text-muted opacity-50;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Custom Grid Utilities */
+  .grid-cards {
+    @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4;
+  }
+
+  .grid-sets {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5;
+  }
+
+  /* Aspect Ratio Utilities */
+  .aspect-card {
+    @apply aspect-[5/7];
+  }
+
+  .aspect-set {
+    @apply aspect-square;
+  }
+
+  /* Text Utilities */
+  .text-15 {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  /* Animation Utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+
+  /* Line Clamp Fix for older browsers */
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Reduce Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .card-interactive:hover {
+    transform: none;
+  }
+
+  .btn-primary:hover {
+    transform: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  * {
+    background: white !important;
+    color: black !important;
+  }
+}

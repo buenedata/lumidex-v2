@@ -1,0 +1,43 @@
+{
+  "name": "lumidex-v2",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:push": "npx supabase db push",
+    "types:gen": "npx supabase gen types typescript --schema public > src/types/supabase.types.ts",
+    "db:dump:schema": "npx supabase db dump --schema-only -f supabase/backups/schema.sql",
+    "db:dump:data": "npx supabase db dump --data-only -f supabase/backups/data.sql",
+    "ingest:sets": "tsx scripts/ingest/sets.ts",
+    "ingest:cards": "tsx scripts/ingest/cards.ts"
+  },
+  "dependencies": {
+    "@headlessui/react": "^2.2.7",
+    "@supabase/ssr": "^0.5.1",
+    "@supabase/supabase-js": "^2.45.4",
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.16",
+    "autoprefixer": "^10.4.21",
+    "clsx": "^2.1.1",
+    "next": "14.2.15",
+    "react": "^18",
+    "react-dom": "^18",
+    "tailwind-merge": "^3.3.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "dotenv": "^16.6.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.15",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "tsx": "^4.19.1",
+    "typescript": "^5"
+  }
+}
