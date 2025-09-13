@@ -42,7 +42,8 @@ export function SetPageClientWrapper({
   const setCollection = useSetCollection({
     setId,
     cards: normalizedCards,
-    userQuantities: {} // We'll let SetCardsWithFilters handle the bulk loading
+    userQuantities: {}, // We'll let SetCardsWithFilters handle the bulk loading
+    variantData: undefined // No variant data needed here, SetCardsWithFilters will handle it
   });
 
   const handleMasterSetToggle = async (isMasterSet: boolean) => {
