@@ -161,7 +161,7 @@ export function OverviewTab({ isAuthenticated, user }: OverviewTabProps) {
                 <Link href="/auth/signin" className="btn btn-primary btn-lg">
                   Get Started Free
                 </Link>
-                <Link href="/sets" className="btn btn-ghost btn-lg">
+                <Link href="/pokemon/sets" className="btn btn-ghost btn-lg">
                   Explore Sets
                 </Link>
               </>

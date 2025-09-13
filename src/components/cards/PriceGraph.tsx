@@ -20,6 +20,8 @@ const VARIANT_CHART_COLORS: Record<VariantName, string> = {
   'normal': '#eab308', // yellow-500
   'holofoil': '#a855f7', // purple-500
   'reverse_holofoil': '#3b82f6', // blue-500
+  'reverse_holo_pokeball': '#ef4444', // red-500
+  'reverse_holo_masterball': '#ec4899', // pink-500
   'first_edition_normal': '#22c55e', // green-500
   'first_edition_holofoil': '#16a34a', // green-600
   'unlimited': '#6b7280', // gray-500

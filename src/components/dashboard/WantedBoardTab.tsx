@@ -222,7 +222,7 @@ export function WantedBoardTab({ isAuthenticated }: WantedBoardTabProps) {
               <Link href="/auth/signin" className="btn btn-primary">
                 Sign Up Free
               </Link>
-              <Link href="/sets" className="btn btn-ghost">
+              <Link href="/pokemon/sets" className="btn btn-ghost">
                 Browse Sets
               </Link>
             </div>
