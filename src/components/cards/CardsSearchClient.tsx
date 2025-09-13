@@ -2,6 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { Panel } from '@/components/ui/Panel';
+import { Button } from '@/components/ui/Button';
+import { Field } from '@/components/ui/Field';
 
 interface CardsSearchClientProps {
   initialFilters: {
@@ -56,7 +59,7 @@ export function CardsSearchClient({ initialFilters }: CardsSearchClientProps) {
     const queryString = params.toString();
     const newURL = queryString ? `/cards?${queryString}` : '/cards';
     
-    router.push(newURL);
+    router.push(newURL as any);
     
     // Reset searching state after a short delay
     setTimeout(() => setIsSearching(false), 500);
@@ -87,75 +90,73 @@ export function CardsSearchClient({ initialFilters }: CardsSearchClientProps) {
   const hasActiveFilters = Object.values(filters).some(value => value !== '');
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border p-6">
+    <Panel>
       <form onSubmit={handleSearch} className="space-y-4">
         {/* Search Input */}
         <div>
-          <label htmlFor="search" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="search" className="form-label">
             Search Cards
           </label>
           <div className="flex space-x-2">
-            <input
+            <Field
               id="search"
               type="text"
               value={filters.q}
               onChange={(e) => handleFilterChange('q', e.target.value)}
               placeholder="Enter card name..."
-              className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="flex-1"
             />
-            <button
+            <Button
               type="submit"
+              variant="primary"
               disabled={isSearching}
-              className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSearching ? 'Searching...' : 'Search'}
-            </button>
+            </Button>
           </div>
         </div>
 
         {/* Filters */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-border">
           {/* Set ID */}
           <div>
-            <label htmlFor="setId" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="setId" className="form-label">
               Set ID
             </label>
-            <input
+            <Field
               id="setId"
               type="text"
               value={filters.setId}
               onChange={(e) => handleFilterChange('setId', e.target.value)}
               placeholder="e.g. sv4, base1"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
 
           {/* Types */}
           <div>
-            <label htmlFor="types" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="types" className="form-label">
               Types
             </label>
-            <input
+            <Field
               id="types"
               type="text"
               value={filters.types}
               onChange={(e) => handleFilterChange('types', e.target.value)}
               placeholder="e.g. Fire,Water"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
-            <p className="text-xs text-gray-500 mt-1">Comma-separated</p>
+            <p className="text-xs text-muted mt-1">Comma-separated</p>
           </div>
 
           {/* Rarity */}
           <div>
-            <label htmlFor="rarity" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="rarity" className="form-label">
               Rarity
             </label>
             <select
               id="rarity"
               value={filters.rarity}
               onChange={(e) => handleFilterChange('rarity', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="field w-full"
             >
               <option value="">All rarities</option>
               <option value="Common">Common</option>
@@ -173,14 +174,14 @@ export function CardsSearchClient({ initialFilters }: CardsSearchClientProps) {
 
           {/* Regulation Mark */}
           <div>
-            <label htmlFor="regulationMark" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="regulationMark" className="form-label">
               Regulation Mark
             </label>
             <select
               id="regulationMark"
               value={filters.regulationMark}
               onChange={(e) => handleFilterChange('regulationMark', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="field w-full"
             >
               <option value="">All regulation marks</option>
               <option value="A">A</option>
@@ -197,17 +198,18 @@ export function CardsSearchClient({ initialFilters }: CardsSearchClientProps) {
 
         {/* Action Buttons */}
         {hasActiveFilters && (
-          <div className="flex justify-end pt-4 border-t">
-            <button
+          <div className="flex justify-end pt-4 border-t border-border">
+            <Button
               type="button"
+              variant="secondary"
+              size="sm"
               onClick={clearFilters}
-              className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 border border-gray-300 rounded-md hover:bg-gray-50"
             >
               Clear All Filters
-            </button>
+            </Button>
           </div>
         )}
       </form>
-    </div>
+    </Panel>
   );
 }

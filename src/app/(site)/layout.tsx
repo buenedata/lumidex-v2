@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import "../globals.css";
-import { Header } from "@/components/layout/Header";
+import { HeaderWithSuspense } from "@/components/layout/HeaderWithSuspense";
+import { QueryProvider } from "@/components/providers/QueryProvider";
+import { CurrencyProviderWrapper } from "@/components/providers/CurrencyProviderWrapper";
+import { ScrollToTop } from "@/components/ui/ScrollToTop";
 
 export const metadata: Metadata = {
-  title: "Lumidex v2 - Pokemon TCG Collection Manager",
+  title: "Lumidex - Pokemon TCG Collection Manager",
   description: "Manage your Pokemon TCG collection with real-time pricing data from Cardmarket and TCGplayer",
 };
 
@@ -15,15 +18,20 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="min-h-screen bg-bg text-text font-sans antialiased">
-        <div className="flex min-h-screen flex-col">
-          <Header />
-          <main className="flex-1">
-            <div className="container mx-auto px-4 py-8">
-              {children}
+        <QueryProvider>
+          <CurrencyProviderWrapper>
+            <div className="flex min-h-screen flex-col">
+              <HeaderWithSuspense />
+              <main className="flex-1">
+                <div className="container mx-auto px-4 py-8">
+                  {children}
+                </div>
+              </main>
+              <Footer />
+              <ScrollToTop />
             </div>
-          </main>
-          <Footer />
-        </div>
+          </CurrencyProviderWrapper>
+        </QueryProvider>
       </body>
     </html>
   );
@@ -37,12 +45,8 @@ function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-aurora rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">L</span>
-              </div>
               <div className="flex items-center space-x-2">
                 <span className="text-xl font-bold text-gradient">Lumidex</span>
-                <span className="text-sm text-muted font-medium">v2</span>
               </div>
             </div>
             <p className="text-sm text-muted max-w-xs">
@@ -81,7 +85,7 @@ function Footer() {
         <div className="border-t border-border mt-8 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
             <p className="text-xs text-muted">
-              © 2024 Lumidex v2. Built for Pokemon TCG collectors.
+              © 2025 Lumidex | Built for Pokemon TCG collectors
             </p>
             <div className="flex items-center space-x-4 text-xs text-muted">
               <span>Cardmarket & TCGplayer pricing</span>

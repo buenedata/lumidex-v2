@@ -27,7 +27,7 @@ export function SignInForm() {
     try {
       const result = await signInWithEmail(email, `${window.location.origin}/auth/callback`);
       
-      if (result.success) {
+      if (!result.error) {
         setMessage({
           type: 'success',
           text: 'Check your email for a magic link to sign in!'
@@ -36,7 +36,7 @@ export function SignInForm() {
       } else {
         setMessage({
           type: 'error',
-          text: result.error || 'Failed to send magic link. Please try again.'
+          text: result.error?.message || 'Failed to send magic link. Please try again.'
         });
       }
     } catch (error) {

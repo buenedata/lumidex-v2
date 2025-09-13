@@ -77,7 +77,7 @@ export default async function CardsPage({ searchParams }: CardsPageProps) {
         </div>
 
         <Suspense fallback={<CardsSkeleton />}>
-          <CardsGrid cards={cards} priceSource={priceSource} />
+          <CardsGrid cards={cards} priceSource={priceSource} userCurrency="EUR" />
         </Suspense>
 
         {/* Pagination */}

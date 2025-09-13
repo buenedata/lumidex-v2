@@ -11,7 +11,7 @@ import { config } from 'dotenv';
 config({ path: '.env.local' });
 
 import { createServiceClient } from '../../src/lib/supabase/server';
-import { fetchAllCards, type PokemonTCGCard } from '../../src/lib/pokeapi/client';
+import { fetchAllCards, type PokemonTCGCard, type CardMarketPrices } from '../../src/lib/pokeapi/client';
 import { mapVariantFromSource, type VariantName, type PriceSource } from '../../src/lib/variants/mapper';
 
 interface DatabaseCard {
@@ -47,6 +47,22 @@ interface DatabasePrice {
   market: number | null;
   direct_low: number | null;
   url: string | null;
+  
+  // Enhanced CardMarket fields
+  average_sell_price: number | null;
+  german_pro_low: number | null;
+  suggested_price: number | null;
+  reverse_holo_sell: number | null;
+  reverse_holo_low: number | null;
+  reverse_holo_trend: number | null;
+  low_price_ex_plus: number | null;
+  trend: number | null;
+  trend_price: number | null;
+  
+  // Historical averages
+  avg_1_day: number | null;
+  avg_7_day: number | null;
+  avg_30_day: number | null;
 }
 
 /**
@@ -76,37 +92,83 @@ function mapCardToDatabase(card: PokemonTCGCard): DatabaseCard {
 }
 
 /**
- * Processes Cardmarket price data and maps variants
+ * Processes CardMarket price data and maps variants
+ * Supports both legacy simple prices and enhanced rich price objects
  */
 function processCardmarketPrices(card: PokemonTCGCard): DatabasePrice[] {
   if (!card.cardmarket?.prices) return [];
 
   const prices: DatabasePrice[] = [];
-  const basePrice: Omit<DatabasePrice, 'variant' | 'low' | 'mid' | 'high' | 'market' | 'direct_low'> = {
+  const basePrice = {
     card_id: card.id,
-    source: 'cardmarket',
+    source: 'cardmarket' as const,
     last_updated: card.cardmarket.updatedAt,
-    currency: 'EUR', // Cardmarket uses EUR
+    currency: 'EUR', // CardMarket uses EUR
     url: card.cardmarket.url
   };
 
-  for (const [externalVariant, price] of Object.entries(card.cardmarket.prices)) {
+  for (const [externalVariant, priceData] of Object.entries(card.cardmarket.prices)) {
     const internalVariant = mapVariantFromSource('cardmarket', externalVariant);
     
     if (!internalVariant) {
-      console.warn(`⚠️ Skipping unknown Cardmarket variant "${externalVariant}" for card ${card.id}`);
+      console.warn(`⚠️ Skipping unknown CardMarket variant "${externalVariant}" for card ${card.id}`);
       continue;
     }
 
-    if (typeof price === 'number' && price > 0) {
+    // Handle both simple number prices (legacy) and rich price objects (enhanced)
+    if (typeof priceData === 'number' && priceData > 0) {
+      // Legacy simple price format
       prices.push({
         ...basePrice,
         variant: internalVariant,
         low: null,
-        mid: price,
+        mid: priceData,
         high: null,
-        market: price,
-        direct_low: null
+        market: priceData,
+        direct_low: null,
+        
+        // Enhanced fields (null for legacy format)
+        average_sell_price: null,
+        german_pro_low: null,
+        suggested_price: null,
+        reverse_holo_sell: null,
+        reverse_holo_low: null,
+        reverse_holo_trend: null,
+        low_price_ex_plus: null,
+        trend: null,
+        trend_price: null,
+        avg_1_day: null,
+        avg_7_day: null,
+        avg_30_day: null,
+      });
+    } else if (typeof priceData === 'object' && priceData) {
+      // Enhanced price object format
+      const richPrice = priceData as CardMarketPrices;
+      
+      prices.push({
+        ...basePrice,
+        variant: internalVariant,
+        low: richPrice.low || null,
+        mid: richPrice.mid || null,
+        high: richPrice.high || null,
+        market: richPrice.market || null,
+        direct_low: richPrice.directLow || null,
+        
+        // Enhanced CardMarket fields
+        average_sell_price: richPrice.averageSellPrice || null,
+        german_pro_low: richPrice.germanProLow || null,
+        suggested_price: richPrice.suggestedPrice || null,
+        reverse_holo_sell: richPrice.reverseHoloSell || null,
+        reverse_holo_low: richPrice.reverseHoloLow || null,
+        reverse_holo_trend: richPrice.reverseHoloTrend || null,
+        low_price_ex_plus: richPrice.lowPriceExPlus || null,
+        trend: richPrice.trend || null,
+        trend_price: richPrice.trendPrice || null,
+        
+        // Historical averages (KEY FEATURE!)
+        avg_1_day: richPrice.avg1 || null,
+        avg_7_day: richPrice.avg7 || null,
+        avg_30_day: richPrice.avg30 || null,
       });
     }
   }
@@ -121,12 +183,26 @@ function processTCGplayerPrices(card: PokemonTCGCard): DatabasePrice[] {
   if (!card.tcgplayer?.prices) return [];
 
   const prices: DatabasePrice[] = [];
-  const basePrice: Omit<DatabasePrice, 'variant' | 'low' | 'mid' | 'high' | 'market' | 'direct_low'> = {
+  const basePrice = {
     card_id: card.id,
-    source: 'tcgplayer',
+    source: 'tcgplayer' as const,
     last_updated: card.tcgplayer.updatedAt,
     currency: 'USD', // TCGplayer uses USD
-    url: card.tcgplayer.url
+    url: card.tcgplayer.url,
+    
+    // TCGPlayer doesn't provide CardMarket-specific fields
+    average_sell_price: null,
+    german_pro_low: null,
+    suggested_price: null,
+    reverse_holo_sell: null,
+    reverse_holo_low: null,
+    reverse_holo_trend: null,
+    low_price_ex_plus: null,
+    trend: null,
+    trend_price: null,
+    avg_1_day: null,
+    avg_7_day: null,
+    avg_30_day: null,
   };
 
   for (const [externalVariant, priceData] of Object.entries(card.tcgplayer.prices)) {

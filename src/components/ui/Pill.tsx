@@ -1,5 +1,9 @@
-import React from 'react';
+'use client'
+
+import React, { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
+import { currencyConverter, formatConvertedPrice, type ConversionResult } from '@/lib/currency/conversion';
+import type { CurrencyCode } from '@/types';
 
 export interface PillProps extends React.HTMLAttributes<HTMLSpanElement> {
   variant?: 'default' | 'brand' | 'success' | 'warning' | 'danger';
@@ -47,25 +51,131 @@ export interface PricePillProps extends Omit<PillProps, 'children'> {
   price: number;
   currency?: string;
   source?: string;
+  userCurrency?: CurrencyCode;
+  showOriginal?: boolean;
+  enableConversion?: boolean;
 }
 
 export const PricePill = React.forwardRef<HTMLSpanElement, PricePillProps>(
-  ({ price, currency = 'EUR', source, className, ...props }, ref) => {
-    const formattedPrice = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency,
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format(price);
+  ({
+    price,
+    currency = 'EUR',
+    source,
+    userCurrency,
+    showOriginal = false,
+    enableConversion = true,
+    className,
+    ...props
+  }, ref) => {
+    const [conversion, setConversion] = useState<ConversionResult | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+      if (!enableConversion || !userCurrency || currency === userCurrency) {
+        setConversion(null);
+        return;
+      }
+
+      const convertPrice = async () => {
+        setIsLoading(true);
+        setError(null);
+        
+        try {
+          const result = await currencyConverter.convert(
+            price,
+            currency as CurrencyCode,
+            userCurrency
+          );
+          setConversion(result);
+        } catch (err) {
+          setError(err instanceof Error ? err.message : 'Conversion failed');
+          setConversion(null);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+
+      convertPrice();
+    }, [price, currency, userCurrency, enableConversion]);
+
+    // Determine what to display
+    const displayPrice = conversion?.convertedAmount ?? price;
+    const displayCurrency = userCurrency ?? currency;
+    
+    // Format the price
+    const formattedPrice = (() => {
+      if (conversion && !conversion.error) {
+        return formatConvertedPrice(conversion);
+      }
+      
+      // Fallback formatting
+      try {
+        return new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: displayCurrency,
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }).format(displayPrice);
+      } catch {
+        return `${displayPrice.toFixed(2)} ${displayCurrency}`;
+      }
+    })();
+
+    // Build tooltip content
+    const getTooltipContent = () => {
+      const parts: string[] = [];
+      
+      if (source) {
+        parts.push(`Price from ${source}`);
+      }
+      
+      if (conversion && !conversion.error) {
+        if (conversion.isApproximate) {
+          parts.push('Approximate conversion');
+        }
+        if (conversion.fallbackUsed) {
+          parts.push(`Using ${conversion.fallbackUsed.replace('_', ' ')}`);
+        }
+        if (showOriginal) {
+          const originalFormatted = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: conversion.fromCurrency,
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }).format(conversion.originalAmount);
+          parts.push(`Original: ${originalFormatted}`);
+        }
+      }
+      
+      if (error) {
+        parts.push(`Conversion error: ${error}`);
+      }
+      
+      return parts.length > 0 ? parts.join(' • ') : undefined;
+    };
 
     return (
       <Pill
         ref={ref}
-        className={cn('tabular-nums', className)}
-        title={source ? `Price from ${source}` : undefined}
+        className={cn(
+          'tabular-nums',
+          isLoading && 'opacity-70',
+          conversion?.isApproximate && 'border-dashed',
+          error && 'text-warning',
+          className
+        )}
+        title={getTooltipContent()}
         {...props}
       >
-        {formattedPrice}
+        {isLoading ? (
+          <span className="inline-flex items-center gap-1">
+            <span className="w-2 h-2 bg-current rounded-full animate-pulse" />
+            {formattedPrice}
+          </span>
+        ) : (
+          formattedPrice
+        )}
       </Pill>
     );
   }

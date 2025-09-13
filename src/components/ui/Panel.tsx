@@ -77,25 +77,27 @@ export const CardPanel = React.forwardRef<HTMLDivElement, CardPanelProps>(
 
 CardPanel.displayName = 'CardPanel';
 
-export interface StatPanelProps extends PanelProps {
+export interface StatPanelProps extends Omit<PanelProps, 'children'> {
   label: string;
   value: string | number;
   subtitle?: string;
   icon?: React.ReactNode;
   trend?: 'up' | 'down' | 'neutral';
   trendValue?: string;
+  children?: React.ReactNode;
 }
 
 export const StatPanel = React.forwardRef<HTMLDivElement, StatPanelProps>(
-  ({ 
-    label, 
-    value, 
-    subtitle, 
-    icon, 
-    trend, 
-    trendValue, 
-    className, 
-    ...props 
+  ({
+    label,
+    value,
+    subtitle,
+    icon,
+    trend,
+    trendValue,
+    className,
+    children,
+    ...props
   }, ref) => {
     const trendColors = {
       up: 'text-success',

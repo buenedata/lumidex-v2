@@ -7,12 +7,17 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:ui": "vitest --ui",
     "db:push": "npx supabase db push",
     "types:gen": "npx supabase gen types typescript --schema public > src/types/supabase.types.ts",
     "db:dump:schema": "npx supabase db dump --schema-only -f supabase/backups/schema.sql",
     "db:dump:data": "npx supabase db dump --data-only -f supabase/backups/data.sql",
     "ingest:sets": "tsx scripts/ingest/sets.ts",
-    "ingest:cards": "tsx scripts/ingest/cards.ts"
+    "ingest:cards": "tsx scripts/ingest/cards.ts",
+    "ingest:prices": "tsx scripts/ingest/prices-only.ts",
+    "migrate:tcg-types": "tsx scripts/migrate-tcg-types.ts"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.7",
@@ -20,24 +25,35 @@
     "@supabase/supabase-js": "^2.45.4",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.16",
+    "@tanstack/react-query": "^5.85.5",
+    "@tanstack/react-query-devtools": "^5.85.5",
     "autoprefixer": "^10.4.21",
     "clsx": "^2.1.1",
+    "lucide-react": "^0.542.0",
     "next": "14.2.15",
     "react": "^18",
     "react-dom": "^18",
+    "recharts": "^3.1.2",
+    "sharp": "^0.34.3",
     "tailwind-merge": "^3.3.1",
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@vitejs/plugin-react": "^5.0.1",
     "dotenv": "^16.6.1",
     "eslint": "^8",
     "eslint-config-next": "14.2.15",
+    "jsdom": "^26.1.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "tsx": "^4.19.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^3.2.4"
   }
 }

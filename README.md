@@ -10,13 +10,13 @@ A modern, full-stack Pokemon Trading Card Game collection management application
 - **Price Source Toggle**: Switch between Cardmarket and TCGplayer pricing seamlessly
 - **Advanced Search**: Filter cards by type, rarity, regulation mark, and more
 - **Responsive Design**: Optimized for desktop and mobile devices
-- **Authentication**: Secure user accounts with magic link sign-in
+- **Authentication**: Secure user accounts with magic link sign-in and OAuth (Google, Discord)
 
 ## 🏗️ Tech Stack
 
 - **Frontend**: Next.js 14 (App Router), TypeScript, Tailwind CSS
 - **Backend**: Supabase (PostgreSQL with Row Level Security)
-- **Authentication**: Supabase Auth (Email Magic Links)
+- **Authentication**: Supabase Auth (Email Magic Links, Google OAuth, Discord OAuth)
 - **Data Source**: Pokemon TCG API v2
 - **Deployment**: Vercel (Frontend) + Supabase (Backend)
 
@@ -173,12 +173,18 @@ See [`MIGRATION_NOTES.md`](MIGRATION_NOTES.md) for detailed schema documentation
 
 ## 🔒 Authentication
 
-The application uses Supabase Auth with email magic links:
+The application uses Supabase Auth with multiple sign-in options:
 
+### Email Magic Links
 1. Users enter their email address
 2. Supabase sends a magic link via email
 3. Clicking the link authenticates the user
-4. User profiles are automatically created on first sign-in
+
+### OAuth Providers
+- **Google**: Sign in with Google account
+- **Discord**: Sign in with Discord account
+
+User profiles are automatically created on first sign-in regardless of the authentication method used.
 
 ## 💰 Price Data & Variants
 
@@ -212,8 +218,13 @@ Our variant mapper ensures consistent internal representation regardless of the 
 
 1. Create a new Supabase project
 2. Enable Email Auth in Authentication settings
-3. Configure email templates (optional)
-4. Set up custom SMTP (optional, but recommended for production)
+3. Configure OAuth providers:
+   - **Google**: Add Google OAuth app credentials
+   - **Discord**: Add Discord OAuth app credentials
+4. Configure email templates (optional)
+5. Set up custom SMTP (optional, but recommended for production)
+
+**Note**: OAuth provider credentials are configured in the Supabase dashboard under Authentication > Settings > Auth Providers. No additional environment variables are required in your application.
 
 ### Pokemon TCG API
 

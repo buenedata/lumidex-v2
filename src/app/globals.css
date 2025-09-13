@@ -107,8 +107,8 @@
   }
 
   /* Form Components */
-  .field { 
-    @apply bg-panel2 border border-border rounded-xl px-3 py-2 text-text placeholder:text-muted placeholder:opacity-60 focus:border-brand2 focus:outline-none transition-colors duration-150; 
+  .field {
+    @apply bg-panel2 border border-border rounded-xl px-3 py-2 text-text placeholder:text-muted placeholder:opacity-60 focus:border-brand2 focus:outline-none transition-colors duration-150 ml-3;
   }
 
   .field:focus {
@@ -154,7 +154,19 @@
   }
 
   .card-interactive {
-    @apply card cursor-pointer transform transition-all duration-150 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-focus;
+    @apply card cursor-pointer transform transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl focus:outline-none focus:ring-focus;
+    transition-property: transform, box-shadow, background-color, border-color;
+    will-change: transform;
+  }
+
+  .card-interactive:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 8px 16px rgba(139, 92, 246, 0.1);
+    background-color: color-mix(in srgb, var(--panel) 95%, var(--panel-2) 5%);
+  }
+
+  .card-interactive:active {
+    transform: translateY(-1px);
+    transition-duration: 100ms;
   }
 
   /* Gradient Backgrounds */
@@ -172,6 +184,43 @@
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  /* Dashboard Typography */
+  .text-dashboard-title {
+    @apply text-lg font-semibold;
+  }
+  
+  .text-dashboard-subtitle {
+    @apply text-sm font-medium;
+  }
+  
+  .text-dashboard-body {
+    @apply text-sm;
+  }
+  
+  .text-dashboard-caption {
+    @apply text-xs;
+  }
+  
+  .text-dashboard-value {
+    @apply text-2xl font-bold;
+  }
+
+  /* Dashboard Grid System */
+  .dashboard-grid {
+    @apply space-y-6;
+  }
+
+  .dashboard-widget {
+    @apply min-h-[200px];
+  }
+
+  /* Quick Action Button Styles */
+  .quick-action-btn {
+    @apply relative flex flex-col items-center justify-center h-16 rounded-xl border transition-all duration-200 text-center p-2;
+    @apply hover:transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-brand2/50;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand2/50;
   }
 
   /* Loading States */
@@ -218,11 +267,11 @@
 
   /* Form Groups */
   .form-group {
-    @apply space-y-1;
+    @apply space-y-4;
   }
 
   .form-label {
-    @apply text-sm font-medium text-muted;
+    @apply text-sm font-medium text-muted mb-2;
   }
 
   .form-error {
@@ -246,11 +295,415 @@
 
   /* Custom Grid Utilities */
   .grid-cards {
-    @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4;
+    @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4;
   }
 
   .grid-sets {
     @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5;
+  }
+
+  /* Dashboard Grid Utilities */
+  .grid-dashboard-1 {
+    @apply grid grid-cols-1 gap-6;
+  }
+
+  .grid-dashboard-2 {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-6;
+  }
+
+  .grid-dashboard-3 {
+    @apply grid grid-cols-1 lg:grid-cols-3 gap-6;
+  }
+
+  .grid-dashboard-4 {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6;
+  }
+
+  .grid-dashboard-auto {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6;
+  }
+
+  /* Dashboard Widget Responsive Sizes */
+  .widget-xs {
+    @apply min-h-[120px];
+  }
+
+  .widget-sm {
+    @apply min-h-[180px];
+  }
+
+  .widget-md {
+    @apply min-h-[240px];
+  }
+
+  .widget-lg {
+    @apply min-h-[320px];
+  }
+
+  .widget-xl {
+    @apply min-h-[400px];
+  }
+
+  /* Dashboard Responsive Containers */
+  .dashboard-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .dashboard-section {
+    @apply space-y-6 mb-8;
+  }
+
+  /* Activity and Feed Styles */
+  .activity-item {
+    @apply p-3 rounded-lg transition-colors duration-150 hover:bg-panel2 cursor-pointer;
+  }
+
+  .activity-icon {
+    @apply w-8 h-8 rounded-lg flex items-center justify-center text-sm;
+  }
+
+  .activity-card {
+    @apply text-brand;
+    background-color: rgba(239, 68, 68, 0.1);
+  }
+  
+  .activity-achievement {
+    @apply text-warning;
+    background-color: rgba(245, 158, 11, 0.1);
+  }
+  
+  .activity-price {
+    @apply text-success;
+    background-color: rgba(34, 197, 94, 0.1);
+  }
+  
+  .activity-trade {
+    @apply text-brand2;
+    background-color: rgba(139, 92, 246, 0.1);
+  }
+
+  .activity-danger {
+    @apply text-danger;
+    background-color: rgba(239, 68, 68, 0.1);
+  }
+
+  /* Progress Bar Animations */
+  .progress-container {
+    @apply w-full h-2 bg-panel2 rounded-full overflow-hidden;
+  }
+
+  .progress-fill {
+    @apply h-full transition-all duration-700 ease-out rounded-full;
+    background: linear-gradient(90deg, var(--brand) 0%, var(--brand-2) 100%);
+    animation: progressGlow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes progressGlow {
+    0% {
+      box-shadow: 0 0 5px rgba(239, 68, 68, 0.3);
+    }
+    100% {
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+    }
+  }
+
+  /* Dashboard Hover Effects */
+  .dashboard-hover {
+    @apply transition-all duration-200 hover:transform hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  .dashboard-interactive {
+    @apply dashboard-hover cursor-pointer hover:border-brand2/50;
+  }
+
+  /* Enhanced Card Hover Effects */
+  .card-image-container {
+    @apply relative overflow-hidden;
+    transition: all 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .card-image {
+    transition: transform 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+  }
+
+  .group:hover .card-image {
+    transform: scale(1.08);
+  }
+
+  .card-content {
+    transition: all 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .group:hover .card-content {
+    transform: translateY(-1px);
+  }
+
+  .card-gradient-overlay {
+    transition: opacity 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: opacity;
+  }
+
+  .card-quick-actions {
+    transition: all 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: translateY(8px);
+    opacity: 0;
+  }
+
+  .group:hover .card-quick-actions {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .card-text-animated {
+    transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .card-pill-animated {
+    transition: all 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateY(0);
+  }
+
+  .group:hover .card-pill-animated {
+    transform: translateY(-1px);
+  }
+
+  /* Set tile enhanced animations */
+  .set-symbol-animated {
+    transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    will-change: transform;
+  }
+
+  .group:hover .set-symbol-animated {
+    transform: scale(1.15) rotate(2deg);
+  }
+
+  .set-content-animated {
+    transition: all 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .group:hover .set-content-animated {
+    transform: translateY(-2px);
+  }
+
+  /* Holographic Card Effects for Sets - whole card */
+  .holographic-card {
+    position: relative !important;
+    overflow: hidden !important;
+    transition: all 0.5s ease !important;
+  }
+
+  .holographic-card:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 0 25px rgba(156, 163, 175, 0.4), 0 0 50px rgba(107, 114, 128, 0.2) !important;
+  }
+
+  .holographic-card::before {
+    content: '' !important;
+    position: absolute !important;
+    top: -100% !important;
+    left: -100% !important;
+    width: 300% !important;
+    height: 300% !important;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(156, 163, 175, 0.8) 45%,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(107, 114, 128, 0.8) 55%,
+      transparent 70%
+    ) !important;
+    transform: translateX(-100%) translateY(-100%) !important;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    opacity: 0 !important;
+    z-index: 5 !important;
+    pointer-events: none !important;
+  }
+
+  .holographic-card:hover::before {
+    opacity: 1 !important;
+    transform: translateX(100%) translateY(100%) !important;
+  }
+
+  /* Type-specific holographic colors with better containment */
+  .holographic-card-tile.type-fire::before {
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(255, 69, 0, 0.8) 45%,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(255, 140, 0, 0.8) 55%,
+      transparent 70%
+    ) !important;
+  }
+
+  .holographic-card-tile.type-fire:hover {
+    box-shadow: 0 0 20px rgba(255, 69, 0, 0.4), 0 0 40px rgba(255, 140, 0, 0.2) !important;
+  }
+
+  .holographic-card-tile.type-water::before {
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(30, 144, 255, 0.8) 45%,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(0, 191, 255, 0.8) 55%,
+      transparent 70%
+    ) !important;
+  }
+
+  .holographic-card-tile.type-water:hover {
+    box-shadow: 0 0 20px rgba(30, 144, 255, 0.4), 0 0 40px rgba(0, 191, 255, 0.2) !important;
+  }
+
+  .holographic-card-tile.type-grass::before {
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(34, 197, 94, 0.8) 45%,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(22, 163, 74, 0.8) 55%,
+      transparent 70%
+    ) !important;
+  }
+
+  .holographic-card-tile.type-grass:hover {
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.4), 0 0 40px rgba(22, 163, 74, 0.2) !important;
+  }
+
+  .holographic-card-tile.type-lightning::before {
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(255, 215, 0, 0.8) 45%,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(255, 193, 7, 0.8) 55%,
+      transparent 70%
+    ) !important;
+  }
+
+  .holographic-card-tile.type-lightning:hover {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 193, 7, 0.2) !important;
+  }
+
+  .holographic-card-tile.type-psychic::before {
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(236, 72, 153, 0.8) 45%,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(219, 39, 119, 0.8) 55%,
+      transparent 70%
+    ) !important;
+  }
+
+  .holographic-card-tile.type-psychic:hover {
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.4), 0 0 40px rgba(219, 39, 119, 0.2) !important;
+  }
+
+  .holographic-card-tile.type-fighting::before {
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(139, 69, 19, 0.8) 45%,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(160, 82, 45, 0.8) 55%,
+      transparent 70%
+    ) !important;
+  }
+
+  .holographic-card-tile.type-fighting:hover {
+    box-shadow: 0 0 20px rgba(139, 69, 19, 0.4), 0 0 40px rgba(160, 82, 45, 0.2) !important;
+  }
+
+  .holographic-card-tile.type-darkness::before {
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(75, 0, 130, 0.8) 45%,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(25, 25, 25, 0.8) 55%,
+      transparent 70%
+    ) !important;
+  }
+
+  .holographic-card-tile.type-darkness:hover {
+    box-shadow: 0 0 20px rgba(75, 0, 130, 0.4), 0 0 40px rgba(25, 25, 25, 0.2) !important;
+  }
+
+  .holographic-card-tile.type-metal::before {
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(192, 192, 192, 0.8) 45%,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(169, 169, 169, 0.8) 55%,
+      transparent 70%
+    ) !important;
+  }
+
+  .holographic-card-tile.type-metal:hover {
+    box-shadow: 0 0 20px rgba(192, 192, 192, 0.4), 0 0 40px rgba(169, 169, 169, 0.2) !important;
+  }
+
+  .holographic-card-tile.type-colorless::before {
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(156, 163, 175, 0.8) 45%,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(107, 114, 128, 0.8) 55%,
+      transparent 70%
+    ) !important;
+  }
+
+  .holographic-card-tile.type-colorless:hover {
+    box-shadow: 0 0 20px rgba(156, 163, 175, 0.4), 0 0 40px rgba(107, 114, 128, 0.2) !important;
+  }
+
+  /* Fix z-index to prevent bleeding */
+  .holographic-card-tile::before {
+    z-index: 1 !important;
+  }
+
+  /* Card-specific holographic effect - whole card */
+  .holographic-card-tile {
+    position: relative !important;
+    overflow: hidden !important;
+    transition: all 0.4s ease !important;
+  }
+
+  .holographic-card-tile:hover {
+    transform: scale(1.05) translateY(-4px) !important;
+    box-shadow: 0 0 20px rgba(156, 163, 175, 0.4), 0 0 40px rgba(107, 114, 128, 0.2) !important;
+  }
+
+  /* Holographic sweep animation across whole card */
+  .holographic-card-tile::before {
+    content: '' !important;
+    position: absolute !important;
+    top: -100% !important;
+    left: -100% !important;
+    width: 300% !important;
+    height: 300% !important;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(156, 163, 175, 0.8) 45%,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(107, 114, 128, 0.8) 55%,
+      transparent 70%
+    ) !important;
+    transform: translateX(-100%) translateY(-100%) !important;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    opacity: 0 !important;
+    z-index: 5 !important;
+    pointer-events: none !important;
+  }
+
+  .holographic-card-tile:hover::before {
+    opacity: 1 !important;
+    transform: translateX(100%) translateY(100%) !important;
   }
 
   /* Aspect Ratio Utilities */
@@ -338,6 +791,274 @@
 
   .btn-primary:hover {
     transform: none;
+  }
+
+  .card-image:hover,
+  .group:hover .card-image {
+    transform: none;
+  }
+
+  .set-symbol-animated:hover,
+  .group:hover .set-symbol-animated {
+    transform: none;
+  }
+
+  .card-content:hover,
+  .group:hover .card-content {
+    transform: none;
+  }
+
+  .set-content-animated:hover,
+  .group:hover .set-content-animated {
+    transform: none;
+  }
+
+  .card-pill-animated:hover,
+  .group:hover .card-pill-animated {
+    transform: none;
+  }
+
+  .card-quick-actions {
+    opacity: 1;
+    transform: none;
+  }
+
+  .holographic-card:hover,
+  .holographic-card-tile:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .holographic-card:hover::after,
+  .holographic-card-tile:hover::after {
+    opacity: 0;
+    transform: none;
+  }
+
+  /* Ensure holographic effects work even when disabled */
+  .holographic-card-tile.disabled:hover::after,
+  .holographic-card-tile[disabled]:hover::after {
+    opacity: 0.7;
+    transform: rotate(-45deg) translateY(200%);
+  }
+
+  .holographic-card.disabled:hover::after,
+  .holographic-card[disabled]:hover::after {
+    opacity: 0.7;
+    transform: rotate(-45deg) translateY(200%);
+  }
+}
+
+/* Collection Management Buttons - From Inspiration */
+@layer components {
+  .collection-buttons-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 8px;
+    height: 24px;
+  }
+
+  .collection-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(120, 120, 120, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    color: #888;
+  }
+
+  .collection-btn.active {
+    background: #FFD700;
+    border-color: #FFD700;
+    color: #000000;
+  }
+
+  .variant-buttons {
+    display: flex;
+    gap: 2px;
+    margin-left: 4px;
+    flex-wrap: wrap;
+  }
+
+  .variant-btn {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(60, 60, 60, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 10px;
+    font-weight: 600;
+    color: transparent;
+  }
+
+  .variant-btn:hover {
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .variant-btn.active {
+    color: white;
+    border-color: currentColor;
+    text-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.8),
+      0 0 4px rgba(0, 0, 0, 0.9),
+      1px 1px 0 rgba(0, 0, 0, 1),
+      -1px -1px 0 rgba(0, 0, 0, 1),
+      1px -1px 0 rgba(0, 0, 0, 1),
+      -1px 1px 0 rgba(0, 0, 0, 1);
+  }
+
+  /* Variant Colors - Updated per user requirements */
+  .normal-btn { background: #FFD700; }
+  .normal-btn.active { box-shadow: 0 0 8px rgba(255, 215, 0, 0.4); }
+  
+  .holo-btn { background: #8A2BE2; }
+  .holo-btn.active { box-shadow: 0 0 8px rgba(138, 43, 226, 0.4); }
+  
+  .reverse-holo-btn { background: #1E90FF; }
+  .reverse-holo-btn.active { box-shadow: 0 0 8px rgba(30, 144, 255, 0.4); }
+  
+  .pokeball-btn { background: #DC143C; }
+  .pokeball-btn.active { box-shadow: 0 0 8px rgba(220, 20, 60, 0.4); }
+  
+  .masterball-btn { background: #FF69B4; }
+  .masterball-btn.active { box-shadow: 0 0 8px rgba(255, 105, 180, 0.4); }
+  
+  .first-edition-btn { background: #32CD32; }
+  .first-edition-btn.active { box-shadow: 0 0 8px rgba(50, 205, 50, 0.4); }
+  
+  .first-edition-normal-btn { background: #228B22; }
+  .first-edition-normal-btn.active { box-shadow: 0 0 8px rgba(34, 139, 34, 0.4); }
+  
+  .first-edition-holo-btn { background: #00FA9A; }
+  .first-edition-holo-btn.active { box-shadow: 0 0 8px rgba(0, 250, 154, 0.4); }
+  
+  .custom-btn { background: #6B7280; }
+  .custom-btn.active { box-shadow: 0 0 8px rgba(107, 114, 128, 0.4); }
+
+  /* Loading states */
+  .variant-btn.loading {
+    opacity: 0.6;
+    pointer-events: none;
+    position: relative;
+  }
+
+  .variant-btn.loading::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  /* Button animations */
+  .variant-btn:active {
+    transform: scale(0.95);
+  }
+
+  .variant-btn.adding {
+    animation: pulse 0.3s ease-in-out;
+  }
+
+  .variant-btn.quantity-changed {
+    animation: quantityPop 0.4s ease-out;
+  }
+
+  @keyframes quantityPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Card Completion Visual Indicators */
+  .card-completed {
+    opacity: 0.6;
+    filter: grayscale(0.3);
+    transition: opacity 0.3s ease, filter 0.3s ease;
+  }
+
+  .card-completed:hover {
+    opacity: 0.8;
+    filter: grayscale(0.1);
+  }
+
+  /* Completion Badge */
+  .completion-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 10;
+    background: #10b981;
+    color: white;
+    border-radius: 12px;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    transform: scale(0);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .completion-badge.visible {
+    transform: scale(1);
+  }
+
+  .completion-badge::before {
+    content: '✓';
+    display: inline-block;
+  }
+
+  /* Responsive completion badge */
+  @media (max-width: 480px) {
+    .completion-badge {
+      top: 6px;
+      right: 6px;
+      padding: 3px 6px;
+      font-size: 10px;
+      border-radius: 10px;
+    }
+  }
+
+  /* Dark mode support for completion indicators */
+  @media (prefers-color-scheme: dark) {
+    .card-completed {
+      filter: grayscale(0.4) brightness(0.8);
+    }
+    
+    .card-completed:hover {
+      filter: grayscale(0.2) brightness(0.9);
+    }
+    
+    .completion-badge {
+      background: #059669;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  /* Accessibility: Reduce motion for completion badge animation */
+  @media (prefers-reduced-motion: reduce) {
+    .completion-badge {
+      transition: none;
+    }
   }
 }
 

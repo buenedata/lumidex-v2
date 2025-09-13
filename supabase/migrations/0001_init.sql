@@ -25,6 +25,7 @@ CREATE TABLE tcg_sets (
   id text PRIMARY KEY,
   name text NOT NULL,
   series text,
+  tcg_type text NOT NULL DEFAULT 'pokemon',
   ptcgo_code text,
   printed_total int,
   total int,
@@ -114,13 +115,15 @@ CREATE TABLE collection_items (
   user_id uuid NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
   card_id text NOT NULL REFERENCES tcg_cards(id) ON DELETE CASCADE,
   variant variant_name NOT NULL DEFAULT 'normal',
+  variant_v2 text, -- New variant system
   quantity int NOT NULL DEFAULT 1,
   condition text,
   acquired_at date,
   notes text,
   created_at timestamptz DEFAULT now(),
   updated_at timestamptz DEFAULT now(),
-  UNIQUE(user_id, card_id, variant)
+  UNIQUE(user_id, card_id, variant),
+  UNIQUE(user_id, card_id, variant_v2)
 );
 
 -- Enable RLS on collection_items

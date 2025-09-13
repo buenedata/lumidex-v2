@@ -9,7 +9,7 @@ Lumidex v2 is a full-stack Pokemon TCG collection management application built w
 - **Frontend**: Next.js 14 (App Router), TypeScript, Tailwind CSS
 - **Backend**: Next.js API Routes, Server Components
 - **Database**: Supabase (PostgreSQL with Row Level Security)
-- **Authentication**: Supabase Auth (Email Magic Links)
+- **Authentication**: Supabase Auth (Email Magic Links, Google OAuth, Discord OAuth)
 - **External API**: Pokemon TCG API v2
 - **Deployment**: Vercel (Frontend) + Supabase (Backend Services)
 - **Package Manager**: npm
@@ -222,9 +222,17 @@ sequenceDiagram
         NextJS-->>User: Render protected content
     else Not Authenticated
         NextJS-->>User: Redirect to sign-in
-        User->>SupabaseAuth: Email sign-in
-        SupabaseAuth-->>User: Magic link email
-        User->>SupabaseAuth: Click magic link
+        
+        alt Email Magic Link
+            User->>SupabaseAuth: Email sign-in
+            SupabaseAuth-->>User: Magic link email
+            User->>SupabaseAuth: Click magic link
+        else OAuth (Google/Discord)
+            User->>SupabaseAuth: OAuth sign-in
+            SupabaseAuth-->>User: Redirect to provider
+            User->>SupabaseAuth: OAuth callback
+        end
+        
         SupabaseAuth->>Database: Create/update profile
         SupabaseAuth-->>NextJS: Authenticated session
     end

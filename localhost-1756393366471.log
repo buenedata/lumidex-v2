@@ -1,0 +1,716 @@
+main-app.js?v=1756393292602:1836 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-1. Queue size: 1
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-2. Queue size: 2
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-3. Queue size: 3
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-4. Queue size: 4
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-5. Queue size: 5
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-6. Queue size: 6
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-7. Queue size: 7
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-8. Queue size: 8
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-9. Queue size: 9
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-10. Queue size: 10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-11. Queue size: 11
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-12. Queue size: 12
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-13. Queue size: 13
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-14. Queue size: 14
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-15. Queue size: 15
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-16. Queue size: 16
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-17. Queue size: 17
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-18. Queue size: 18
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-19. Queue size: 19
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-20. Queue size: 20
+use-variant-queries.ts:31 🚀 BATCHING: Max batch size reached (20), processing immediately
+use-variant-queries.ts:57 📦 BATCHING: Processing batch of 20 requests
+use-variant-queries.ts:71 🎯 BATCHING: Grouped into 1 sets: [{…}]
+use-variant-queries.ts:86 🚀 BATCHING: 20 requests for set sv10, using BULK API
+use-variant-queries.ts:148 🚀 BATCHING: Making BULK API call for 20 cards in set sv10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-21. Queue size: 1
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-22. Queue size: 2
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-23. Queue size: 3
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-24. Queue size: 4
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-25. Queue size: 5
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-26. Queue size: 6
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-27. Queue size: 7
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-28. Queue size: 8
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-29. Queue size: 9
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-30. Queue size: 10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-31. Queue size: 11
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-32. Queue size: 12
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-33. Queue size: 13
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-34. Queue size: 14
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-35. Queue size: 15
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-36. Queue size: 16
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-37. Queue size: 17
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-38. Queue size: 18
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-39. Queue size: 19
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-40. Queue size: 20
+use-variant-queries.ts:31 🚀 BATCHING: Max batch size reached (20), processing immediately
+use-variant-queries.ts:57 📦 BATCHING: Processing batch of 20 requests
+use-variant-queries.ts:71 🎯 BATCHING: Grouped into 1 sets: [{…}]
+use-variant-queries.ts:86 🚀 BATCHING: 20 requests for set sv10, using BULK API
+use-variant-queries.ts:148 🚀 BATCHING: Making BULK API call for 20 cards in set sv10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-41. Queue size: 1
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-42. Queue size: 2
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-43. Queue size: 3
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-44. Queue size: 4
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-45. Queue size: 5
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-46. Queue size: 6
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-47. Queue size: 7
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-48. Queue size: 8
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-49. Queue size: 9
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-50. Queue size: 10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-51. Queue size: 11
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-52. Queue size: 12
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-53. Queue size: 13
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-54. Queue size: 14
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-55. Queue size: 15
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-56. Queue size: 16
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-57. Queue size: 17
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-58. Queue size: 18
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-59. Queue size: 19
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-60. Queue size: 20
+use-variant-queries.ts:31 🚀 BATCHING: Max batch size reached (20), processing immediately
+use-variant-queries.ts:57 📦 BATCHING: Processing batch of 20 requests
+use-variant-queries.ts:71 🎯 BATCHING: Grouped into 1 sets: [{…}]
+use-variant-queries.ts:86 🚀 BATCHING: 20 requests for set sv10, using BULK API
+use-variant-queries.ts:148 🚀 BATCHING: Making BULK API call for 20 cards in set sv10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-61. Queue size: 1
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-62. Queue size: 2
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-63. Queue size: 3
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-64. Queue size: 4
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-65. Queue size: 5
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-66. Queue size: 6
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-67. Queue size: 7
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-68. Queue size: 8
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-69. Queue size: 9
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-70. Queue size: 10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-71. Queue size: 11
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-72. Queue size: 12
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-73. Queue size: 13
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-74. Queue size: 14
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-75. Queue size: 15
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-76. Queue size: 16
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-77. Queue size: 17
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-78. Queue size: 18
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-79. Queue size: 19
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-80. Queue size: 20
+use-variant-queries.ts:31 🚀 BATCHING: Max batch size reached (20), processing immediately
+use-variant-queries.ts:57 📦 BATCHING: Processing batch of 20 requests
+use-variant-queries.ts:71 🎯 BATCHING: Grouped into 1 sets: [{…}]
+use-variant-queries.ts:86 🚀 BATCHING: 20 requests for set sv10, using BULK API
+use-variant-queries.ts:148 🚀 BATCHING: Making BULK API call for 20 cards in set sv10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-81. Queue size: 1
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-82. Queue size: 2
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-83. Queue size: 3
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-84. Queue size: 4
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-85. Queue size: 5
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-86. Queue size: 6
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-87. Queue size: 7
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-88. Queue size: 8
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-89. Queue size: 9
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-90. Queue size: 10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-91. Queue size: 11
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-92. Queue size: 12
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-93. Queue size: 13
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-94. Queue size: 14
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-95. Queue size: 15
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-96. Queue size: 16
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-97. Queue size: 17
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-98. Queue size: 18
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-99. Queue size: 19
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-100. Queue size: 20
+use-variant-queries.ts:31 🚀 BATCHING: Max batch size reached (20), processing immediately
+use-variant-queries.ts:57 📦 BATCHING: Processing batch of 20 requests
+use-variant-queries.ts:71 🎯 BATCHING: Grouped into 1 sets: [{…}]
+use-variant-queries.ts:86 🚀 BATCHING: 20 requests for set sv10, using BULK API
+use-variant-queries.ts:148 🚀 BATCHING: Making BULK API call for 20 cards in set sv10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-101. Queue size: 1
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-102. Queue size: 2
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-103. Queue size: 3
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-104. Queue size: 4
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-105. Queue size: 5
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-106. Queue size: 6
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-107. Queue size: 7
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-108. Queue size: 8
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-109. Queue size: 9
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-110. Queue size: 10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-111. Queue size: 11
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-112. Queue size: 12
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-113. Queue size: 13
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-114. Queue size: 14
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-115. Queue size: 15
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-116. Queue size: 16
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-117. Queue size: 17
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-118. Queue size: 18
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-119. Queue size: 19
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-120. Queue size: 20
+use-variant-queries.ts:31 🚀 BATCHING: Max batch size reached (20), processing immediately
+use-variant-queries.ts:57 📦 BATCHING: Processing batch of 20 requests
+use-variant-queries.ts:71 🎯 BATCHING: Grouped into 1 sets: [{…}]
+use-variant-queries.ts:86 🚀 BATCHING: 20 requests for set sv10, using BULK API
+use-variant-queries.ts:148 🚀 BATCHING: Making BULK API call for 20 cards in set sv10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-121. Queue size: 1
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-122. Queue size: 2
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-123. Queue size: 3
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-124. Queue size: 4
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-125. Queue size: 5
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-126. Queue size: 6
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-127. Queue size: 7
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-128. Queue size: 8
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-129. Queue size: 9
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-130. Queue size: 10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-131. Queue size: 11
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-132. Queue size: 12
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-133. Queue size: 13
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-134. Queue size: 14
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-135. Queue size: 15
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-136. Queue size: 16
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-137. Queue size: 17
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-138. Queue size: 18
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-139. Queue size: 19
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-140. Queue size: 20
+use-variant-queries.ts:31 🚀 BATCHING: Max batch size reached (20), processing immediately
+use-variant-queries.ts:57 📦 BATCHING: Processing batch of 20 requests
+use-variant-queries.ts:71 🎯 BATCHING: Grouped into 1 sets: [{…}]
+use-variant-queries.ts:86 🚀 BATCHING: 20 requests for set sv10, using BULK API
+use-variant-queries.ts:148 🚀 BATCHING: Making BULK API call for 20 cards in set sv10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-141. Queue size: 1
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-142. Queue size: 2
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-143. Queue size: 3
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-144. Queue size: 4
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-145. Queue size: 5
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-146. Queue size: 6
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-147. Queue size: 7
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-148. Queue size: 8
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-149. Queue size: 9
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-150. Queue size: 10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-151. Queue size: 11
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-152. Queue size: 12
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-153. Queue size: 13
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-154. Queue size: 14
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-155. Queue size: 15
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-156. Queue size: 16
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-157. Queue size: 17
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-158. Queue size: 18
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-159. Queue size: 19
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-160. Queue size: 20
+use-variant-queries.ts:31 🚀 BATCHING: Max batch size reached (20), processing immediately
+use-variant-queries.ts:57 📦 BATCHING: Processing batch of 20 requests
+use-variant-queries.ts:71 🎯 BATCHING: Grouped into 1 sets: [{…}]
+use-variant-queries.ts:86 🚀 BATCHING: 20 requests for set sv10, using BULK API
+use-variant-queries.ts:148 🚀 BATCHING: Making BULK API call for 20 cards in set sv10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-161. Queue size: 1
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-162. Queue size: 2
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-163. Queue size: 3
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-164. Queue size: 4
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-165. Queue size: 5
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-166. Queue size: 6
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-167. Queue size: 7
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-168. Queue size: 8
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-169. Queue size: 9
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-170. Queue size: 10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-171. Queue size: 11
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-172. Queue size: 12
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-173. Queue size: 13
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-174. Queue size: 14
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-175. Queue size: 15
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-176. Queue size: 16
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-177. Queue size: 17
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-178. Queue size: 18
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-179. Queue size: 19
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-180. Queue size: 20
+use-variant-queries.ts:31 🚀 BATCHING: Max batch size reached (20), processing immediately
+use-variant-queries.ts:57 📦 BATCHING: Processing batch of 20 requests
+use-variant-queries.ts:71 🎯 BATCHING: Grouped into 1 sets: [{…}]
+use-variant-queries.ts:86 🚀 BATCHING: 20 requests for set sv10, using BULK API
+use-variant-queries.ts:148 🚀 BATCHING: Making BULK API call for 20 cards in set sv10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-181. Queue size: 1
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-182. Queue size: 2
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-183. Queue size: 3
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-184. Queue size: 4
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-185. Queue size: 5
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-186. Queue size: 6
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-187. Queue size: 7
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-188. Queue size: 8
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-189. Queue size: 9
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-190. Queue size: 10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-191. Queue size: 11
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-192. Queue size: 12
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-193. Queue size: 13
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-194. Queue size: 14
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-195. Queue size: 15
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-196. Queue size: 16
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-197. Queue size: 17
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-198. Queue size: 18
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-199. Queue size: 19
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-200. Queue size: 20
+use-variant-queries.ts:31 🚀 BATCHING: Max batch size reached (20), processing immediately
+use-variant-queries.ts:57 📦 BATCHING: Processing batch of 20 requests
+use-variant-queries.ts:71 🎯 BATCHING: Grouped into 1 sets: [{…}]
+use-variant-queries.ts:86 🚀 BATCHING: 20 requests for set sv10, using BULK API
+use-variant-queries.ts:148 🚀 BATCHING: Making BULK API call for 20 cards in set sv10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-201. Queue size: 1
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-202. Queue size: 2
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-203. Queue size: 3
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-204. Queue size: 4
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-205. Queue size: 5
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-206. Queue size: 6
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-207. Queue size: 7
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-208. Queue size: 8
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-209. Queue size: 9
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-210. Queue size: 10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-211. Queue size: 11
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-212. Queue size: 12
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-213. Queue size: 13
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-214. Queue size: 14
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-215. Queue size: 15
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-216. Queue size: 16
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-217. Queue size: 17
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-218. Queue size: 18
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-219. Queue size: 19
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-220. Queue size: 20
+use-variant-queries.ts:31 🚀 BATCHING: Max batch size reached (20), processing immediately
+use-variant-queries.ts:57 📦 BATCHING: Processing batch of 20 requests
+use-variant-queries.ts:71 🎯 BATCHING: Grouped into 1 sets: [{…}]
+use-variant-queries.ts:86 🚀 BATCHING: 20 requests for set sv10, using BULK API
+use-variant-queries.ts:148 🚀 BATCHING: Making BULK API call for 20 cards in set sv10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-221. Queue size: 1
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-222. Queue size: 2
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-223. Queue size: 3
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-224. Queue size: 4
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-225. Queue size: 5
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-226. Queue size: 6
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-227. Queue size: 7
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-228. Queue size: 8
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-229. Queue size: 9
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-230. Queue size: 10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-231. Queue size: 11
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-232. Queue size: 12
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-233. Queue size: 13
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-234. Queue size: 14
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-235. Queue size: 15
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-236. Queue size: 16
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-237. Queue size: 17
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-238. Queue size: 18
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-239. Queue size: 19
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-240. Queue size: 20
+use-variant-queries.ts:31 🚀 BATCHING: Max batch size reached (20), processing immediately
+use-variant-queries.ts:57 📦 BATCHING: Processing batch of 20 requests
+use-variant-queries.ts:71 🎯 BATCHING: Grouped into 1 sets: [{…}]
+use-variant-queries.ts:86 🚀 BATCHING: 20 requests for set sv10, using BULK API
+use-variant-queries.ts:148 🚀 BATCHING: Making BULK API call for 20 cards in set sv10
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-241. Queue size: 1
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-242. Queue size: 2
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-243. Queue size: 3
+use-variant-queries.ts:25 🔄 BATCHING: Adding request for card sv10-244. Queue size: 4
+scheduler.development.js:519 [Violation] 'message' handler took 388ms
+use-variant-queries.ts:42 ⏰ BATCHING: Timer expired, processing 4 requests
+use-variant-queries.ts:57 📦 BATCHING: Processing batch of 4 requests
+use-variant-queries.ts:71 🎯 BATCHING: Grouped into 1 sets: [{…}]
+use-variant-queries.ts:86 🚀 BATCHING: 4 requests for set sv10, using BULK API
+use-variant-queries.ts:148 🚀 BATCHING: Making BULK API call for 4 cards in set sv10
+warn-once.js:16 Image with src "/_next/static/media/lumidex_logo_card_allcaps_transparent.ef25fe31.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+warnOnce @ warn-once.js:16
+eval @ image-component.js:90
+Promise.then
+handleLoading @ image-component.js:37
+eval @ image-component.js:183
+commitAttachRef @ react-dom.development.js:21677
+safelyAttachRef @ react-dom.development.js:20803
+commitLayoutEffectOnFiber @ react-dom.development.js:21498
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21488
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21488
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21488
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21488
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21488
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21488
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21577
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21577
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21577
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21577
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21552
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21518
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21488
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21577
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21488
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21488
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21577
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21577
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21418
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21418
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21418
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21577
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21577
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21418
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21577
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21418
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21418
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21577
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21577
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21577
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21577
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21577
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21577
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21418
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21407
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21577
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21577
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21577
+recursivelyTraverseLayoutEffects @ react-dom.development.js:22926
+commitLayoutEffectOnFiber @ react-dom.development.js:21437
+commitLayoutEffects @ react-dom.development.js:22912
+commitRootImpl @ react-dom.development.js:26226
+commitRoot @ react-dom.development.js:26077
+commitRootWhenReady @ react-dom.development.js:24749
+finishConcurrentRender @ react-dom.development.js:24714
+performConcurrentWorkOnRoot @ react-dom.development.js:24559
+workLoop @ scheduler.development.js:256
+flushWork @ scheduler.development.js:225
+performWorkUntilDeadline @ scheduler.development.js:534
+use-variant-queries.ts:102 ❌ BATCHING: Bulk request failed for set sv10, falling back to individual requests
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-1
+use-variant-queries.ts:102 ❌ BATCHING: Bulk request failed for set sv10, falling back to individual requests
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-41
+use-variant-queries.ts:102 ❌ BATCHING: Bulk request failed for set sv10, falling back to individual requests
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-21
+use-variant-queries.ts:102 ❌ BATCHING: Bulk request failed for set sv10, falling back to individual requests
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-61
+use-variant-queries.ts:102 ❌ BATCHING: Bulk request failed for set sv10, falling back to individual requests
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-101
+use-variant-queries.ts:102 ❌ BATCHING: Bulk request failed for set sv10, falling back to individual requests
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-81
+use-variant-queries.ts:102 ❌ BATCHING: Bulk request failed for set sv10, falling back to individual requests
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-121
+use-variant-queries.ts:102 ❌ BATCHING: Bulk request failed for set sv10, falling back to individual requests
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-161
+use-variant-queries.ts:102 ❌ BATCHING: Bulk request failed for set sv10, falling back to individual requests
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-141
+use-variant-queries.ts:102 ❌ BATCHING: Bulk request failed for set sv10, falling back to individual requests
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-181
+use-variant-queries.ts:102 ❌ BATCHING: Bulk request failed for set sv10, falling back to individual requests
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-201
+use-variant-queries.ts:102 ❌ BATCHING: Bulk request failed for set sv10, falling back to individual requests
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-241
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-2
+use-variant-queries.ts:102 ❌ BATCHING: Bulk request failed for set sv10, falling back to individual requests
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-221
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-42
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-22
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-62
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-102
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-162
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-82
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-122
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-142
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-182
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-202
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-242
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-222
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-43
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-3
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-23
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-63
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-163
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-103
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-83
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-143
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-123
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-183
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-203
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-243
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-223
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-24
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-44
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-64
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-4
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-164
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-84
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-104
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-144
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-124
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-184
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-204
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-224
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-244
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-25
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-45
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-5
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-65
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-165
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-85
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-105
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-145
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-185
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-125
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-205
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-225
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-26
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-6
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-46
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-66
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-166
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-86
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-146
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-106
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-186
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-126
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-206
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-27
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-226
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-7
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-47
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-67
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-87
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-147
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-107
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-187
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-167
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-127
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-207
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-28
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-227
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-48
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-68
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-8
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-88
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-148
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-108
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-188
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-168
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-208
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-29
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-228
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-128
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-49
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-9
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-69
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-89
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-109
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-169
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-209
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-149
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-189
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-30
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-229
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-129
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-10
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-70
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-50
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-90
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-110
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-170
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-210
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-150
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-190
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-31
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-230
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-130
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-11
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-71
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-51
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-91
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-171
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-211
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-151
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-111
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-231
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-191
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-32
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-131
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-12
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-72
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-52
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-172
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-92
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-152
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-112
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-232
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-212
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-192
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-33
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-132
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-73
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-13
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-173
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-53
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-93
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-153
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-113
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-233
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-133
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-213
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-193
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-34
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-74
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-14
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-174
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-54
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-154
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-94
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-114
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-234
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-134
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-214
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-15
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-194
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-35
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-75
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-175
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-55
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-95
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-155
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-115
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-135
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-235
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-215
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-16
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-36
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-195
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-76
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-176
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-56
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-96
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-156
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-116
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-136
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-236
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-216
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-17
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-37
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-196
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-77
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-97
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-57
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-177
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-117
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-137
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-157
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-18
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-237
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-217
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-38
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-197
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-78
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-58
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-98
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-178
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-118
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-138
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-158
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-218
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-19
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-238
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-39
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-198
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-79
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-59
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-99
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-139
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-119
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-179
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-159
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-219
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-20
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-239
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-40
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-199
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-80
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-100
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-60
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-140
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-120
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-160
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-180
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-220
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-240
+use-variant-queries.ts:125 🔄 BATCHING: Making individual API call for card sv10-200

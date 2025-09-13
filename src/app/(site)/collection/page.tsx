@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 import { getCurrentUser } from '@/lib/supabase/server';
 import { getUserCollection, getCollectionValue } from '@/lib/db/queries';
-import { CollectionClient } from '@/components/collection/CollectionClient';
+import { CollectionWithVariants } from '@/components/collection/CollectionWithVariants';
 import { CollectionStats } from '@/components/collection/CollectionStats';
 
 interface CollectionPageProps {
@@ -20,34 +20,23 @@ export default async function CollectionPage({ searchParams }: CollectionPagePro
 
   const priceSource = searchParams.source || 'cardmarket';
   
-  // Fetch user's collection and value summary
-  const [collectionItems, collectionValue] = await Promise.all([
-    getUserCollection(user.id),
-    getCollectionValue(user.id, priceSource)
-  ]);
+  // Fetch collection value summary
+  const collectionValue = await getCollectionValue(user.id, priceSource);
 
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="text-center space-y-4">
-        <h1 className="text-3xl font-bold text-gradient">My Collection</h1>
-        <p className="text-muted max-w-2xl mx-auto">
+      <div className="text-center space-y-6 mb-8">
+        <h1 className="text-4xl font-bold text-gradient">My Collection</h1>
+        <p className="text-muted max-w-2xl mx-auto text-lg leading-relaxed">
           Manage your Pokemon card collection and track its value with real-time pricing data.
         </p>
       </div>
 
-      {/* Collection Stats */}
-      <Suspense fallback={<StatsSkeleton />}>
-        <CollectionStats
-          stats={collectionValue}
-          priceSource={priceSource}
-        />
-      </Suspense>
 
       {/* Collection Items */}
       <Suspense fallback={<CollectionSkeleton />}>
-        <CollectionClient
-          items={collectionItems}
+        <CollectionWithVariants
           userId={user.id}
           priceSource={priceSource}
         />

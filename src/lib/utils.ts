@@ -85,15 +85,31 @@ export function getInitials(name: string): string {
 
 /**
  * Format date for display
+ * Uses consistent formatting to avoid hydration mismatches
  */
 export function formatDate(date: string | Date): string {
   const dateObj = typeof date === 'string' ? new Date(date) : date;
   
+  // Ensure we use UTC to avoid timezone differences between server/client
   return new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
+    timeZone: 'UTC'
   }).format(dateObj);
+}
+
+/**
+ * Client-safe date formatting for components that might hydrate
+ */
+export function formatDateSafe(date: string | Date): string {
+  const dateObj = typeof date === 'string' ? new Date(date) : date;
+  
+  // Manual formatting to ensure consistency across server/client
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  
+  return `${months[dateObj.getUTCMonth()]} ${dateObj.getUTCDate()}, ${dateObj.getUTCFullYear()}`;
 }
 
 /**

@@ -155,7 +155,11 @@ function CollectionItem({
                 )}
                 {item.acquired_at && (
                   <span>
-                    Added: {new Date(item.acquired_at).toLocaleDateString()}
+                    Added: {new Date(item.acquired_at).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'numeric',
+                      day: 'numeric'
+                    })}
                   </span>
                 )}
               </div>

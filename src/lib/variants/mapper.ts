@@ -1,17 +1,55 @@
-// Variant normalization system for Pokemon TCG price data
-// Maps external variant names from TCGplayer and Cardmarket to internal normalized names
+// Centralized variant mapping system for Pokemon TCG
+// This is the single source of truth for all variant mappings across the application
 
-export type VariantName = 
-  | 'normal' 
-  | 'holofoil' 
-  | 'reverse_holofoil' 
-  | 'first_edition_normal' 
-  | 'first_edition_holofoil' 
+import type { UIVariantType } from '@/types/variants';
+
+// Legacy database variant names (what's stored in the collection_items table)
+export type VariantName =
+  | 'normal'
+  | 'holofoil'
+  | 'reverse_holofoil'
+  | 'reverse_holo_pokeball'
+  | 'reverse_holo_masterball'
+  | 'first_edition_normal'
+  | 'first_edition_holofoil'
   | 'unlimited';
 
 export type PriceSource = 'cardmarket' | 'tcgplayer';
 
-// TCGplayer external variant mapping to internal variants
+// CENTRALIZED MAPPING: Database variants to UI variants
+// This is used by ALL components to ensure consistency
+export function mapDBVariantToUIVariant(dbVariant: string): UIVariantType | null {
+  const mapping: Record<string, UIVariantType> = {
+    'normal': 'normal',
+    'holofoil': 'holo',
+    'reverse_holofoil': 'reverse_holo_standard',
+    'reverse_holo_pokeball': 'reverse_holo_pokeball',
+    'reverse_holo_masterball': 'reverse_holo_masterball',
+    'first_edition_normal': 'first_edition',
+    'first_edition_holofoil': 'first_edition', // Legacy compatibility
+    'unlimited': 'normal'
+  };
+  
+  return mapping[dbVariant] || null;
+}
+
+// CENTRALIZED MAPPING: UI variants to database variants
+// This is used by ALL components to ensure consistency
+export function mapUIVariantToDBVariant(uiVariant: UIVariantType): string {
+  const mapping: Record<UIVariantType, string> = {
+    'normal': 'normal',
+    'holo': 'holofoil',
+    'reverse_holo_standard': 'reverse_holofoil',
+    'reverse_holo_pokeball': 'reverse_holo_pokeball',
+    'reverse_holo_masterball': 'reverse_holo_masterball',
+    'first_edition': 'first_edition_normal',
+    'custom': 'normal' // fallback
+  };
+  
+  return mapping[uiVariant] || 'normal';
+}
+
+// TCGplayer external variant mapping to database variants
 const tcgplayerVariantMap: Record<string, VariantName> = {
   'normal': 'normal',
   'holofoil': 'holofoil',
@@ -28,7 +66,7 @@ const tcgplayerVariantMap: Record<string, VariantName> = {
   'unlimited holofoil': 'holofoil'
 };
 
-// Cardmarket external variant mapping to internal variants
+// Cardmarket external variant mapping to database variants
 const cardmarketVariantMap: Record<string, VariantName> = {
   'normal': 'normal',
   'holofoil': 'holofoil',
@@ -117,6 +155,8 @@ export function getVariantDisplayName(variant: VariantName): string {
     'normal': 'Normal',
     'holofoil': 'Holofoil',
     'reverse_holofoil': 'Reverse Holofoil',
+    'reverse_holo_pokeball': 'Reverse Holo (Poké Ball)',
+    'reverse_holo_masterball': 'Reverse Holo (Master Ball)',
     'first_edition_normal': '1st Edition Normal',
     'first_edition_holofoil': '1st Edition Holofoil',
     'unlimited': 'Unlimited'

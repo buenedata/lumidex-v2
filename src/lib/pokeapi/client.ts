@@ -24,6 +24,9 @@ export interface PokemonTCGSet {
   };
 }
 
+// CardMarket prices are simple key-value pairs: field name -> number
+export type CardMarketPrices = Record<string, number>;
+
 export interface PokemonTCGCard {
   id: string;
   name: string;
@@ -63,7 +66,7 @@ export interface PokemonTCGCard {
   cardmarket?: {
     url: string;
     updatedAt: string;
-    prices: Record<string, number>;
+    prices: CardMarketPrices; // Pokemon TCG API v2 structure - simple key-value pairs
   };
   tcgplayer?: {
     url: string;
@@ -104,6 +107,9 @@ class PokemonTCGApiClient {
       headers['X-Api-Key'] = this.apiKey;
     }
 
+    console.log(`🔗 API Request: ${url.toString()}`);
+    console.log(`📋 Headers: ${JSON.stringify(headers, null, 2)}`);
+
     let attempts = 0;
     const maxAttempts = 3;
 
@@ -111,7 +117,18 @@ class PokemonTCGApiClient {
       try {
         const response = await fetch(url.toString(), { headers });
 
+        console.log(`📡 Response: ${response.status} ${response.statusText}`);
+
         if (!response.ok) {
+          // Get response body for debugging
+          let errorBody = '';
+          try {
+            errorBody = await response.text();
+            console.log(`❌ Error Response Body: ${errorBody}`);
+          } catch (e) {
+            console.log(`❌ Could not read error response body`);
+          }
+
           // Handle rate limiting
           if (response.status === 429) {
             const retryAfter = response.headers.get('Retry-After');
@@ -132,13 +149,29 @@ class PokemonTCGApiClient {
             }
           }
 
-          throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+          // For 404 and other client errors, provide more context
+          let errorMessage = `API request failed: ${response.status} ${response.statusText}`;
+          if (response.status === 404) {
+            errorMessage += `\nURL: ${url.toString()}`;
+            errorMessage += `\nThis might indicate:`;
+            errorMessage += `\n- Invalid API endpoint`;
+            errorMessage += `\n- Pokemon TCG API service issues`;
+            errorMessage += `\n- Network connectivity problems`;
+          }
+          if (errorBody) {
+            errorMessage += `\nResponse: ${errorBody}`;
+          }
+
+          throw new Error(errorMessage);
         }
 
         const data = await response.json();
+        console.log(`✅ API request successful, received ${JSON.stringify(data).length} characters`);
         return data;
       } catch (error) {
         attempts++;
+        console.log(`❌ Request attempt ${attempts} failed:`, error instanceof Error ? error.message : error);
+        
         if (attempts >= maxAttempts) {
           throw error;
         }
@@ -158,11 +191,20 @@ class PokemonTCGApiClient {
     pageSize?: number;
     orderBy?: string;
   } = {}): Promise<PokemonTCGApiResponse<PokemonTCGSet>> {
-    const params = {
-      page: options.page?.toString() || '1',
-      pageSize: options.pageSize?.toString() || '250',
-      orderBy: options.orderBy || 'releaseDate',
-    };
+    const params: Record<string, string> = {};
+    
+    // Only add parameters if they're different from defaults
+    if (options.page && options.page !== 1) {
+      params.page = options.page.toString();
+    }
+    
+    if (options.pageSize && options.pageSize !== 250) {
+      params.pageSize = options.pageSize.toString();
+    }
+    
+    if (options.orderBy) {
+      params.orderBy = options.orderBy;
+    }
 
     return this.makeRequest<PokemonTCGApiResponse<PokemonTCGSet>>('/sets', params);
   }
@@ -197,15 +239,33 @@ class PokemonTCGApiClient {
     pageSize?: number;
     orderBy?: string;
     q?: string; // Query for incremental updates
+    select?: string; // Fields to select (e.g., "id,cardmarket,tcgplayer")
   } = {}): Promise<PokemonTCGApiResponse<PokemonTCGCard>> {
-    const params: Record<string, string> = {
-      page: options.page?.toString() || '1',
-      pageSize: options.pageSize?.toString() || '250',
-      orderBy: options.orderBy || 'set.releaseDate,number',
-    };
-
+    const params: Record<string, string> = {};
+    
+    // Add page if specified and not 1
+    if (options.page && options.page > 1) {
+      params.page = options.page.toString();
+    }
+    
+    // Add pageSize if specified and not default
+    if (options.pageSize && options.pageSize !== 250) {
+      params.pageSize = options.pageSize.toString();
+    }
+    
+    // Add orderBy if specified
+    if (options.orderBy) {
+      params.orderBy = options.orderBy;
+    }
+    
+    // Add query if specified
     if (options.q) {
       params.q = options.q;
+    }
+    
+    // Add select if specified
+    if (options.select) {
+      params.select = options.select;
     }
 
     return this.makeRequest<PokemonTCGApiResponse<PokemonTCGCard>>('/cards', params);
@@ -213,7 +273,7 @@ class PokemonTCGApiClient {
 
   /**
    * Fetch all cards using pagination
-   * Supports incremental updates with since parameter
+   * Supports incremental updates with since parameter and field selection
    */
   async fetchAllCards(since?: string): Promise<PokemonTCGCard[]> {
     const allCards: PokemonTCGCard[] = [];
@@ -229,9 +289,9 @@ class PokemonTCGApiClient {
 
     while (hasMore) {
       console.log(`Fetching cards page ${page}...`);
-      const response = await this.fetchCards({ 
-        page, 
-        pageSize: 250,
+      const response = await this.fetchCards({
+        page,
+        // Don't specify pageSize - let API use its default to avoid 404s
         q: query || undefined
       });
       

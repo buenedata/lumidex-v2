@@ -1,0 +1,12 @@
+{
+  "roo.alwaysPrependInstructions": [
+    "You are working on the Lumidex project.",
+    "Always use Supabase as the backend.",
+    "Database schema must match Pokémon TCG API v2 and https://www.pokemonpricetracker.com/pokemon-tcg-api naming conventions.",
+    "Never generate individual card detail pages. We only use set overview pages and collection pages.",
+    "Code should always be production-ready and type-safe (TypeScript).",
+    "Do not remove or alter environment variable usage (.env.local).",
+    "Always read the file currentdb.sql when checking what tables and columns we use in our database",
+    "Remember that you are on windows."
+  ]
+}

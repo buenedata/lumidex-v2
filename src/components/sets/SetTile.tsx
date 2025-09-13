@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Transition } from '@headlessui/react';
 import { Panel } from '@/components/ui/Panel';
 import { cn, formatDate } from '@/lib/utils';
 
@@ -27,36 +28,36 @@ export function SetTile({ set, className, showSeries = false }: SetTileProps) {
 
   return (
     <Link
-      href={`/sets/${set.id}`}
-      className={cn('block group', className)}
+      href={`/pokemon/sets/${set.id}`}
+      className={cn('block', className)}
     >
-      <Panel 
+      <Panel
         variant="interactive"
-        className="card-interactive h-full"
+        className="holographic-card h-full relative z-10"
       >
-        <div className="flex flex-col items-center text-center space-y-4 p-6">
+        <div className="flex flex-col items-center text-center space-y-4 p-6 relative z-1">
           {/* Set Logo/Symbol */}
           <div className="relative w-16 h-16 flex items-center justify-center">
-            {set.images?.symbol ? (
-              <Image
-                src={set.images.symbol}
-                alt={`${set.name} symbol`}
-                width={64}
-                height={64}
-                className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-200"
-                unoptimized
-              />
-            ) : set.images?.logo ? (
+            {set.images?.logo ? (
               <Image
                 src={set.images.logo}
                 alt={`${set.name} logo`}
                 width={120}
                 height={64}
-                className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-200"
+                className="max-w-full max-h-full object-contain"
+                unoptimized
+              />
+            ) : set.images?.symbol ? (
+              <Image
+                src={set.images.symbol}
+                alt={`${set.name} symbol`}
+                width={64}
+                height={64}
+                className="w-full h-full object-contain"
                 unoptimized
               />
             ) : (
-              <div className="w-full h-full bg-panel2 rounded-lg flex items-center justify-center group-hover:bg-panel transition-colors duration-200">
+              <div className="w-full h-full bg-panel2 rounded-lg flex items-center justify-center">
                 <span className="text-xs text-muted font-medium">
                   {set.name.split(' ').map(word => word.charAt(0)).join('').slice(0, 3)}
                 </span>
@@ -66,7 +67,7 @@ export function SetTile({ set, className, showSeries = false }: SetTileProps) {
 
           {/* Set Name */}
           <div className="space-y-1">
-            <h3 className="font-semibold text-sm text-text group-hover:text-gradient transition-colors duration-200 line-clamp-2">
+            <h3 className="font-semibold text-sm text-text line-clamp-2">
               {set.name}
             </h3>
             {showSeries && set.series && (
@@ -83,21 +84,18 @@ export function SetTile({ set, className, showSeries = false }: SetTileProps) {
 
           {/* Card Count */}
           <div className="flex items-center justify-center space-x-2">
-            <div className="text-xs bg-panel2 rounded-full px-2 py-1 group-hover:bg-aurora-radial transition-colors duration-200">
+            <div className="text-xs bg-panel2 rounded-full px-3 py-1.5">
               <span className="font-medium text-text">
-                {printedCount}
+                {printedCount} cards
               </span>
-              {totalCount !== printedCount && (
-                <span className="text-muted">
-                  /{totalCount}
+              {totalCount > printedCount && (
+                <span className="text-muted ml-2">
+                  {totalCount - printedCount} Secret cards
                 </span>
               )}
             </div>
           </div>
         </div>
-
-        {/* Hover Gradient Overlay */}
-        <div className="absolute inset-0 bg-aurora-radial opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none rounded-2xl" />
       </Panel>
     </Link>
   );

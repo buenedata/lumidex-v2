@@ -34,8 +34,8 @@ export async function GET(request: NextRequest) {
         }
       }
 
-      // Redirect to collection page on successful auth
-      return NextResponse.redirect(new URL('/collection', requestUrl.origin));
+      // Redirect to dashboard page on successful auth
+      return NextResponse.redirect(new URL('/', requestUrl.origin));
     } catch (error) {
       console.error('Unexpected auth error:', error);
       return NextResponse.redirect(new URL('/auth/signin?error=unexpected_error', requestUrl.origin));

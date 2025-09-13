@@ -1,12 +1,20 @@
+import React from 'react';
+import { StatPanel } from '@/components/ui/Panel';
 import type { PriceSource } from '@/lib/variants/mapper';
+import type { CurrencyCode } from '@/types';
 
-interface CollectionStatsProps {
-  stats: {
-    totalCards: number;
-    totalQuantity: number;
-    totalValue: number;
-    currency: string;
-  };
+export interface CollectionStatsData {
+  totalCards: number;
+  totalQuantity: number;
+  totalValue: number;
+  currency: string;
+  originalValue?: number;
+  originalCurrency?: string;
+  conversionRate?: number;
+}
+
+export interface CollectionStatsProps {
+  stats: CollectionStatsData;
   priceSource: PriceSource;
 }
 
@@ -14,7 +22,7 @@ export function CollectionStats({ stats, priceSource }: CollectionStatsProps) {
   const formatCurrency = (amount: number, currency: string) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: currency,
+      currency,
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }).format(amount);
@@ -53,7 +61,11 @@ export function CollectionStats({ stats, priceSource }: CollectionStatsProps) {
       <StatCard
         title="Collection Value"
         value={stats.totalValue > 0 ? formatCurrency(stats.totalValue, stats.currency) : 'N/A'}
-        description={`Based on ${sourceDisplayName} prices`}
+        description={
+          stats.originalValue && stats.originalCurrency
+            ? `Based on ${sourceDisplayName} prices (converted from ${stats.originalCurrency})`
+            : `Based on ${sourceDisplayName} prices`
+        }
         icon={
           <svg className="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />

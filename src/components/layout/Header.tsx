@@ -2,14 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { Disclosure } from '@headlessui/react';
-import { PriceSourceToggle, type PriceSource } from '@/components/ui/PriceSourceToggle';
 import { Button } from '@/components/ui/Button';
+import { MegaMenu } from '@/components/navigation/MegaMenu';
 import { cn } from '@/lib/utils';
+import LumidexLogo from '@/images/lumidex_logo_card_allcaps_transparent.png';
+import type { PriceSource } from '@/types';
 
 const navigation = [
-  { name: 'Sets', href: '/sets' },
+  { name: 'Dashboard', href: '/' },
   { name: 'Cards', href: '/cards' },
   { name: 'Collection', href: '/collection' },
 ];
@@ -19,145 +22,134 @@ export function Header() {
   const router = useRouter();
   const pathname = usePathname();
   
-  const currentSource = (searchParams.get('source') as PriceSource) || 'cardmarket';
-  
-  const handlePriceSourceChange = (newSource: PriceSource) => {
-    const params = new URLSearchParams(searchParams);
-    params.set('source', newSource);
-    router.push(`${pathname}?${params.toString()}` as any);
-  };
+  // Price source is now handled by user preferences, not URL params
+  // We'll default to 'cardmarket' for anonymous users
 
   return (
-    <Disclosure as="header" className="bg-bg border-b border-border sticky top-0 z-50">
-      {({ open }) => (
-        <>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-16">
-              {/* Logo and Brand */}
-              <div className="flex items-center">
-                <Link href="/" className="flex items-center space-x-3 group">
-                  <div className="w-8 h-8 bg-aurora rounded-lg flex items-center justify-center transform group-hover:scale-105 transition-transform duration-150">
-                    <span className="text-white font-bold text-sm">L</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-xl font-bold text-gradient">Lumidex</span>
-                    <span className="text-sm text-muted font-medium">v2</span>
-                  </div>
-                </Link>
-              </div>
+    <>
+      <Disclosure as="header" className="bg-bg border-b border-border sticky top-0 z-50">
+        {({ open }) => (
+          <>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex justify-between items-center h-16">
+                {/* Logo and Brand */}
+                <div className="flex items-center">
+                  <Link href="/" className="flex items-center group">
+                    <div className="w-48 h-12 relative transform group-hover:scale-105 transition-transform duration-150">
+                      <Image
+                        src={LumidexLogo}
+                        alt="Lumidex Logo"
+                        fill
+                        className="object-contain"
+                        priority
+                      />
+                    </div>
+                  </Link>
+                </div>
 
-              {/* Desktop Navigation */}
-              <nav className="hidden md:flex space-x-1">
+                {/* Desktop Navigation */}
+                <nav className="hidden md:flex items-center space-x-1">
+                  {navigation.map((item) => (
+                    <Link
+                      key={item.name}
+                      href={item.href as any}
+                      className={cn(
+                        'px-4 py-2 rounded-xl text-sm font-medium transition-all duration-150',
+                        'hover:bg-panel2 hover:text-text',
+                        pathname === item.href
+                          ? 'nav-active text-text bg-panel2'
+                          : 'text-muted'
+                      )}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                  
+                  {/* MegaMenu for Sets */}
+                  <MegaMenu />
+                </nav>
+
+                {/* Desktop Tools */}
+                <div className="hidden md:flex items-center space-x-4">
+                  {/* Authentication */}
+                  <AuthButton />
+                </div>
+
+                {/* Mobile menu button */}
+                <div className="md:hidden">
+                  <Disclosure.Button className="btn btn-ghost btn-sm">
+                    <span className="sr-only">Open main menu</span>
+                    {open ? (
+                      <XMarkIcon className="w-5 h-5" />
+                    ) : (
+                      <Bars3Icon className="w-5 h-5" />
+                    )}
+                  </Disclosure.Button>
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile Navigation Panel */}
+            <Disclosure.Panel className="md:hidden mobile-menu border-t border-border">
+              <div className="px-4 pt-4 pb-3 space-y-1">
                 {navigation.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href as any}
                     className={cn(
-                      'px-4 py-2 rounded-xl text-sm font-medium transition-all duration-150',
-                      'hover:bg-panel2 hover:text-text',
+                      'block px-3 py-2 rounded-xl text-base font-medium transition-colors duration-150',
                       pathname === item.href
-                        ? 'nav-active text-text bg-panel2'
-                        : 'text-muted'
+                        ? 'bg-panel2 text-text'
+                        : 'text-muted hover:text-text hover:bg-panel2'
                     )}
                   >
                     {item.name}
                   </Link>
                 ))}
-              </nav>
-
-              {/* Desktop Tools */}
-              <div className="hidden md:flex items-center space-x-4">
-                {/* Search Button */}
-                <button
-                  className="btn btn-ghost btn-sm"
-                  onClick={() => {
-                    // TODO: Implement search modal
-                    console.log('Search triggered');
-                  }}
-                >
-                  <SearchIcon className="w-4 h-4 mr-2" />
-                  Search
-                  <kbd className="ml-2 inline-flex items-center px-1.5 py-0.5 rounded text-xs font-mono bg-panel2 border border-border">
-                    ⌘K
-                  </kbd>
-                </button>
-
-                {/* Price Source Toggle */}
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm text-muted">Prices:</span>
-                  <PriceSourceToggle
-                    value={currentSource}
-                    onChange={handlePriceSourceChange}
-                    size="sm"
-                  />
-                </div>
-
-                {/* Authentication */}
-                <AuthButton />
-              </div>
-
-              {/* Mobile menu button */}
-              <div className="md:hidden">
-                <Disclosure.Button className="btn btn-ghost btn-sm">
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <XMarkIcon className="w-5 h-5" />
-                  ) : (
-                    <Bars3Icon className="w-5 h-5" />
-                  )}
-                </Disclosure.Button>
-              </div>
-            </div>
-          </div>
-
-          {/* Mobile Navigation Panel */}
-          <Disclosure.Panel className="md:hidden mobile-menu border-t border-border">
-            <div className="px-4 pt-4 pb-3 space-y-1">
-              {navigation.map((item) => (
+                
+                {/* Mobile Browse Link */}
                 <Link
-                  key={item.name}
-                  href={item.href as any}
+                  href={"/browse" as any}
                   className={cn(
                     'block px-3 py-2 rounded-xl text-base font-medium transition-colors duration-150',
-                    pathname === item.href
+                    pathname === '/browse'
                       ? 'bg-panel2 text-text'
                       : 'text-muted hover:text-text hover:bg-panel2'
                   )}
                 >
-                  {item.name}
+                  Browse Sets
                 </Link>
-              ))}
-            </div>
-            
-            <div className="border-t border-border px-4 pt-4 pb-3">
-              {/* Mobile Price Source */}
-              <div className="mb-4">
-                <PriceSourceToggle
-                  value={currentSource}
-                  onChange={handlePriceSourceChange}
-                />
               </div>
               
-              {/* Mobile Auth */}
-              <AuthButton />
-            </div>
-          </Disclosure.Panel>
-        </>
-      )}
-    </Disclosure>
+              <div className="border-t border-border px-4 pt-4 pb-3">
+                {/* Mobile Auth */}
+                <AuthButton />
+              </div>
+            </Disclosure.Panel>
+          </>
+        )}
+      </Disclosure>
+    </>
   );
 }
 
 function AuthButton() {
   const [user, setUser] = useState<any>(null);
+  const [userProfile, setUserProfile] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getUser = async () => {
       const { getCurrentUser } = await import('@/lib/supabase/client');
+      const { getUserProfile } = await import('@/lib/db/queries');
       try {
-        const currentUser = await getCurrentUser();
+        const { user: currentUser } = await getCurrentUser();
         setUser(currentUser);
+        
+        if (currentUser?.id) {
+          const profile = await getUserProfile(currentUser.id);
+          setUserProfile(profile);
+        }
       } catch (error) {
         console.error('Error getting user:', error);
       } finally {
@@ -186,13 +178,36 @@ function AuthButton() {
   }
 
   if (user) {
+    const avatarUrl = userProfile?.avatar_url;
+    const displayName = userProfile?.display_name || user.email;
+    const initials = displayName?.charAt(0).toUpperCase() || '?';
+
     return (
       <div className="flex items-center space-x-3">
-        <div className="w-8 h-8 bg-aurora rounded-full flex items-center justify-center">
-          <span className="text-white text-sm font-medium">
-            {user.email?.charAt(0).toUpperCase()}
-          </span>
-        </div>
+        <Link
+          href="/profile"
+          className="flex items-center space-x-2 p-1 rounded-lg hover:bg-panel2 transition-colors"
+        >
+          {avatarUrl ? (
+            <div className="w-8 h-8 rounded-full overflow-hidden">
+              <Image
+                src={avatarUrl}
+                alt={`${displayName}'s avatar`}
+                width={32}
+                height={32}
+                className="w-full h-full object-cover"
+                unoptimized
+              />
+            </div>
+          ) : (
+            <div className="w-8 h-8 bg-aurora rounded-full flex items-center justify-center">
+              <span className="text-white text-sm font-medium">
+                {initials}
+              </span>
+            </div>
+          )}
+          <span className="text-sm text-text font-medium hidden sm:block">Profile</span>
+        </Link>
         <button
           onClick={handleSignOut}
           className="text-sm text-muted hover:text-text transition-colors"
@@ -211,14 +226,6 @@ function AuthButton() {
 }
 
 // Icons
-function SearchIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-    </svg>
-  );
-}
-
 function Bars3Icon({ className }: { className?: string }) {
   return (
     <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">

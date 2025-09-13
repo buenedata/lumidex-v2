@@ -6,9 +6,12 @@ import { Pill, PricePill, RarityPill } from '@/components/ui/Pill';
 import { Button } from '@/components/ui/Button';
 import { cn, formatCardNumber } from '@/lib/utils';
 import type { PriceSource } from '@/components/ui/PriceSourceToggle';
+import type { CurrencyCode } from '@/types';
+import type { CardWithPrices } from '@/types/pricing';
+import { VariantQuantityButtonGroup } from '@/components/variants/VariantQuantityButtons';
 
 export interface CardTileProps {
-  card: {
+  card: CardWithPrices | {
     id: string;
     name: string;
     number: string;
@@ -22,6 +25,7 @@ export interface CardTileProps {
       small?: string;
       large?: string;
     };
+    // Legacy price structure for backward compatibility
     prices?: {
       cardmarket?: {
         averageSellPrice?: number;
@@ -34,18 +38,22 @@ export interface CardTileProps {
         mid?: number;
       };
     };
+    // New price structure
+    price_data?: CardWithPrices['price_data'];
   };
-  priceSource: PriceSource;
+  priceSource?: PriceSource;
+  userCurrency?: CurrencyCode;
   className?: string;
   showQuickActions?: boolean;
   variant?: 'default' | 'compact' | 'detailed';
   onAddToCollection?: (card: CardTileProps['card']) => void;
 }
 
-export function CardTile({ 
-  card, 
-  priceSource, 
-  className, 
+export function CardTile({
+  card,
+  priceSource = 'cardmarket',
+  userCurrency,
+  className,
   showQuickActions = false,
   variant = 'default',
   onAddToCollection
@@ -53,37 +61,61 @@ export function CardTile({
   const [isHovered, setIsHovered] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  const getPrice = () => {
-    if (!card.prices) return null;
-    
-    if (priceSource === 'cardmarket') {
-      return card.prices.cardmarket?.trendPrice || card.prices.cardmarket?.averageSellPrice;
+  const getPriceData = () => {
+    // Use new price_data structure if available
+    if ('price_data' in card && card.price_data?.cheapest_variant_price) {
+      return {
+        price: card.price_data.cheapest_variant_price.price,
+        currency: card.price_data.cheapest_variant_price.currency,
+        source: card.price_data.price_source_used,
+        variant: card.price_data.cheapest_variant_price.variant,
+        hasFallback: card.price_data.has_fallback
+      };
     }
     
-    return card.prices.tcgplayer?.market || card.prices.tcgplayer?.mid;
+    // Fall back to legacy prices structure
+    if ('prices' in card && card.prices) {
+      let price: number | undefined;
+      let currency: string;
+      
+      if (priceSource === 'cardmarket') {
+        price = card.prices.cardmarket?.trendPrice || card.prices.cardmarket?.averageSellPrice;
+        currency = 'EUR'; // Cardmarket prices are in EUR
+      } else {
+        price = card.prices.tcgplayer?.market || card.prices.tcgplayer?.mid;
+        currency = 'USD'; // TCGPlayer prices are in USD
+      }
+      
+      return price ? { price, currency, source: priceSource, variant: 'normal', hasFallback: false } : null;
+    }
+    
+    return null;
   };
 
-  const price = getPrice();
+  const priceData = getPriceData();
+
+  // Get primary type for holographic effect
+  const primaryType = card.types?.[0]?.toLowerCase().replace(/\s+/g, '-') || 'normal';
 
   return (
-    <div 
+    <div
       className={cn('group relative', className)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Panel 
+      <Panel
         variant="interactive"
         padding="none"
-        className="card-interactive h-full overflow-hidden"
+        className={cn('holographic-card-tile h-full relative', `type-${primaryType}`)}
       >
         {/* Card Image */}
-        <div className="relative aspect-card bg-panel2 overflow-hidden">
+        <div className="card-image-container relative aspect-card bg-panel2">
           {card.images?.small && !imageError ? (
             <Image
               src={card.images.small}
               alt={card.name}
               fill
-              className="object-contain group-hover:scale-105 transition-transform duration-300 p-1"
+              className="card-image object-contain p-1"
               onError={() => setImageError(true)}
               unoptimized
             />
@@ -99,8 +131,8 @@ export function CardTile({
           )}
 
           {/* Quick Actions Overlay */}
-          {showQuickActions && isHovered && onAddToCollection && (
-            <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          {showQuickActions && onAddToCollection && (
+            <div className="card-quick-actions absolute inset-0 bg-black/25 flex items-center justify-center backdrop-blur-sm">
               <Button
                 size="sm"
                 variant="primary"
@@ -109,7 +141,7 @@ export function CardTile({
                   e.stopPropagation();
                   onAddToCollection(card);
                 }}
-                className="shadow-lg"
+                className="shadow-xl transform hover:scale-105 transition-transform duration-200"
               >
                 <PlusIcon className="w-4 h-4 mr-1" />
                 Add
@@ -118,44 +150,64 @@ export function CardTile({
           )}
 
           {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-aurora-radial opacity-0 group-hover:opacity-5 transition-opacity duration-200 pointer-events-none" />
+          <div className="card-gradient-overlay absolute inset-0 bg-aurora-radial opacity-0 group-hover:opacity-10 pointer-events-none" />
         </div>
 
         {/* Card Info */}
-        <div className="p-3 space-y-2">
+        <div className="p-3 space-y-2 relative z-1">
           {/* Name and Number */}
           <div className="space-y-1">
             <h3 className={cn(
-              'font-medium text-text group-hover:text-gradient transition-colors duration-200',
+              'card-text-animated font-medium text-text group-hover:text-gradient',
               variant === 'compact' ? 'text-xs line-clamp-1' : 'text-sm line-clamp-2'
             )}>
               {card.name}
             </h3>
             
             <div className="flex items-center justify-between text-xs text-muted">
-              <span>#{formatCardNumber(card.number)}</span>
-              {card.setName && variant === 'detailed' && (
-                <span className="truncate ml-2">{card.setName}</span>
+              <span className="card-text-animated group-hover:text-text">#{formatCardNumber(card.number)}</span>
+              {('setName' in card ? card.setName : undefined) && variant === 'detailed' && (
+                <span className="card-text-animated truncate ml-2 group-hover:text-text">{'setName' in card ? card.setName : ''}</span>
               )}
             </div>
           </div>
 
-
           {/* Rarity and Price */}
           <div className="flex items-center justify-between pt-1">
             {card.rarity && (
-              <RarityPill rarity={card.rarity} size="sm" />
+              <RarityPill rarity={card.rarity} size="sm" className="card-pill-animated" />
             )}
             
-            {price && (
-              <PricePill 
-                price={price} 
-                source={priceSource}
+            {priceData && (
+              <PricePill
+                price={priceData.price}
+                currency={priceData.currency}
+                userCurrency={userCurrency}
+                source={priceData.source}
                 size="sm"
-                className="ml-auto"
+                className="card-pill-animated ml-auto"
+                enableConversion={true}
+                title={`From ${priceData.variant} variant${priceData.hasFallback ? ` (${priceData.source} source)` : ''}`}
               />
             )}
           </div>
+
+          {/* Variant Quantity Buttons */}
+          <VariantQuantityButtonGroup
+            card={{
+              set_id: card.id,
+              set_name: card.name,
+              number: card.number,
+              rarity: card.rarity || 'Common',
+              sets: {
+                set_id: card.set_id || '',
+                set_series: ('setName' in card ? card.setName : undefined) || 'Unknown',
+                releaseDate: '2023/01/01'
+              }
+            }}
+            disabled={false}
+            className="pt-1"
+          />
         </div>
       </Panel>
     </div>
@@ -203,6 +255,7 @@ export function CardTileSkeleton({ className, variant = 'default' }: CardTileSke
 export interface CardGridProps {
   cards: CardTileProps['card'][];
   priceSource: PriceSource;
+  userCurrency?: CurrencyCode;
   loading?: boolean;
   className?: string;
   showQuickActions?: boolean;
@@ -210,14 +263,15 @@ export interface CardGridProps {
   onAddToCollection?: (card: CardTileProps['card']) => void;
 }
 
-export function CardGrid({ 
-  cards, 
-  priceSource, 
-  loading, 
-  className, 
+export function CardGrid({
+  cards,
+  priceSource,
+  userCurrency,
+  loading,
+  className,
   showQuickActions,
   variant,
-  onAddToCollection 
+  onAddToCollection
 }: CardGridProps) {
   if (loading) {
     return (
@@ -256,6 +310,7 @@ export function CardGrid({
           <CardTile
             card={card}
             priceSource={priceSource}
+            userCurrency={userCurrency}
             showQuickActions={showQuickActions}
             variant={variant}
             onAddToCollection={onAddToCollection}

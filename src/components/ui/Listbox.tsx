@@ -36,17 +36,16 @@ export function Listbox({
 
   return (
     <div className={cn('form-group', className)}>
-      {label && (
-        <HeadlessListbox.Label className="form-label">
-          {label}
-        </HeadlessListbox.Label>
-      )}
-      
-      <HeadlessListbox 
-        value={value} 
+      <HeadlessListbox
+        value={value}
         onChange={onChange}
         disabled={disabled}
       >
+        {label && (
+          <HeadlessListbox.Label className="form-label">
+            {label}
+          </HeadlessListbox.Label>
+        )}
         <div className="relative">
           <HeadlessListbox.Button
             className={cn(
@@ -149,18 +148,17 @@ export function MultiListbox({
 
   return (
     <div className={cn('form-group', className)}>
-      {label && (
-        <HeadlessListbox.Label className="form-label">
-          {label}
-        </HeadlessListbox.Label>
-      )}
-      
-      <HeadlessListbox 
-        value={values} 
+      <HeadlessListbox
+        value={values}
         onChange={onChange}
         disabled={disabled}
         multiple
       >
+        {label && (
+          <HeadlessListbox.Label className="form-label">
+            {label}
+          </HeadlessListbox.Label>
+        )}
         <div className="relative">
           <HeadlessListbox.Button
             className={cn(

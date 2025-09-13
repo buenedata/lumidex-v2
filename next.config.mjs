@@ -13,6 +13,15 @@ const nextConfig = {
       },
     ],
   },
+  webpack: (config, { isServer }) => {
+    // Exclude filesforinspiration directory from compilation
+    config.module.rules.push({
+      test: /\.tsx?$/,
+      exclude: /filesforinspiration/,
+    });
+    
+    return config;
+  },
 };
 
 export default nextConfig;

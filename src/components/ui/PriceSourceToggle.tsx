@@ -78,17 +78,17 @@ export interface PriceSourceToggleWithLabelProps extends PriceSourceToggleProps 
   showDescriptions?: boolean;
 }
 
-export function PriceSourceToggleWithLabel({ 
+export function PriceSourceToggleWithLabel({
   label = 'Price Source',
   showDescriptions = false,
   className,
-  ...props 
+  ...props
 }: PriceSourceToggleWithLabelProps) {
   return (
     <div className={cn('space-y-2', className)}>
-      <RadioGroup.Label className="text-sm font-medium text-muted">
+      <label className="text-sm font-medium text-muted">
         {label}
-      </RadioGroup.Label>
+      </label>
       <RadioGroup
         value={props.value}
         onChange={props.onChange}
@@ -111,9 +111,9 @@ export function PriceSourceToggleWithLabel({
             {({ checked }) => (
               <div className="p-3">
                 <div className="flex items-center justify-between">
-                  <RadioGroup.Label className="text-sm font-medium text-text">
+                  <span className="text-sm font-medium text-text">
                     {source.label}
-                  </RadioGroup.Label>
+                  </span>
                   <div
                     className={cn(
                       'w-4 h-4 rounded-full border-2 transition-colors',
@@ -128,9 +128,9 @@ export function PriceSourceToggleWithLabel({
                   </div>
                 </div>
                 {showDescriptions && (
-                  <RadioGroup.Description className="text-xs text-muted mt-1">
+                  <span className="text-xs text-muted mt-1 block">
                     {source.description}
-                  </RadioGroup.Description>
+                  </span>
                 )}
               </div>
             )}
