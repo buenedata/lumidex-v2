@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import type { TCGSet, TCGCard } from '@/types';
 
+export const dynamic = 'force-dynamic';
+
 export interface SearchResult {
   type: 'set' | 'card';
   item: TCGSet | (TCGCard & { set: TCGSet });
