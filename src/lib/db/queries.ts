@@ -550,6 +550,12 @@ export async function getUserCollectionWithDetails(userId: string): Promise<any[
  * Clean up invalid variant records that don't match the variant engine rules
  */
 async function cleanupInvalidVariants(userId: string, collectionData: any[]): Promise<any[]> {
+  // Skip variant validation during server-side rendering to prevent 500 errors
+  if (typeof window === 'undefined') {
+    console.log('Skipping variant cleanup during SSR');
+    return collectionData;
+  }
+  
   const supabase = createClient();
   const validRecords: any[] = [];
   const invalidRecords: any[] = [];
@@ -570,7 +576,7 @@ async function cleanupInvalidVariants(userId: string, collectionData: any[]): Pr
       const card = firstItem.card;
       
       // Get valid variants from the engine
-      const engineResponse = await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/variants/engine`, {
+      const engineResponse = await fetch(`/api/variants/engine`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
