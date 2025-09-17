@@ -13,9 +13,12 @@ export default async function PokemonSetPage({ params }: PokemonSetPageProps) {
   const { id } = params;
   const tcgInfo = getTCGInfo('pokemon');
   
+  // Create server-side supabase client
+  const supabase = createClient();
+  
   const [set, cards] = await Promise.all([
-    getSetById(id),
-    getCardsForSet(id)
+    getSetByIdSSR(id, supabase),
+    getCardsForSetSSR(id, supabase)
   ]);
 
   if (!set || set.tcg_type !== 'pokemon') {
@@ -25,7 +28,6 @@ export default async function PokemonSetPage({ params }: PokemonSetPageProps) {
   // Get user preferences for pricing
   let userPreferences: UserPreferences | null = null;
   try {
-    const supabase = createClient();
     const { data: { user } } = await supabase.auth.getUser();
     
     if (user) {
@@ -44,6 +46,50 @@ export default async function PokemonSetPage({ params }: PokemonSetPageProps) {
       userPreferences={userPreferences}
     />
   );
+}
+
+// Server-side versions of the queries that use server supabase client
+async function getSetByIdSSR(setId: string, supabase: any): Promise<TCGSet | null> {
+  const { data, error } = await supabase
+    .from('tcg_sets')
+    .select('*')
+    .eq('id', setId)
+    .single();
+  
+  if (error) {
+    console.error('Error fetching set:', error);
+    return null;
+  }
+  
+  return data;
+}
+
+async function getCardsForSetSSR(setId: string, supabase: any): Promise<TCGCard[]> {
+  const { data, error } = await supabase
+    .from('tcg_cards')
+    .select('*')
+    .eq('set_id', setId);
+  
+  if (error) {
+    console.error('Error fetching cards for set:', error);
+    return [];
+  }
+  
+  // Sort cards numerically by number (handle formats like "001", "001/100", etc.)
+  const sortedData = (data || []).sort((a: any, b: any) => {
+    // Extract the numeric part before any slash or non-digit character
+    const getNumericValue = (number: string) => {
+      const match = number.match(/^(\d+)/);
+      return match ? parseInt(match[1], 10) : 0;
+    };
+    
+    const aNum = getNumericValue(a.number);
+    const bNum = getNumericValue(b.number);
+    
+    return aNum - bNum;
+  });
+  
+  return sortedData;
 }
 
 // Generate metadata for SEO
