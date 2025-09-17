@@ -5,6 +5,8 @@ import { getTCGInfo } from '@/lib/tcg/constants';
 import type { UserPreferences } from '@/types';
 import { SetPageClientWrapper } from './SetPageClientWrapper';
 
+export const dynamic = 'force-dynamic';
+
 interface PokemonSetPageProps {
   params: { id: string };
 }
