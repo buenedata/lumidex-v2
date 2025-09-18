@@ -74,153 +74,30 @@ export function CollectionWithVariants({
   });
 
 
-  // Fetch user's collection with variant data
+  // Fetch user's collection with ultra-fast endpoint (no variant engine)
   useEffect(() => {
     const fetchCollection = async () => {
       try {
         setLoading(true);
 
-        // Get user's collection with full card details
-        const collectionData = await getUserCollectionWithDetails(userId);
+        // Use the ultra-fast collection endpoint that bypasses variant engine
+        const response = await fetch('/api/collection/fast');
         
-        if (collectionData.length === 0) {
-          setCollectionCards([]);
-          return;
+        if (!response.ok) {
+          throw new Error(`Collection API error: ${response.status}`);
         }
 
-        // Group by card ID and aggregate quantities, filtering out zero quantities
-        const cardGroups = new Map<string, any[]>();
-        collectionData.forEach((item: any) => {
-          // Additional safety check - only include items with quantity > 0
-          if (item.quantity > 0) {
-            const cardId = item.card_id;
-            const existing = cardGroups.get(cardId) || [];
-            existing.push(item);
-            cardGroups.set(cardId, existing);
-          }
-        });
-
-        // Process each card group and fetch all available variants
-        const processedCards: CollectionCard[] = [];
+        const result = await response.json();
         
-        for (const [cardId, items] of Array.from(cardGroups.entries())) {
-          try {
-            const firstItem = items[0];
-            const card = firstItem.card;
-            const set = card.set;
-
-            // Calculate user quantities for each variant
-            const userQuantities: Partial<Record<UIVariantType, number>> = {};
-            items.forEach((item: any) => {
-              // Map database variant to UI variant type
-              const uiVariantType = mapDBVariantToUIVariant(item.variant);
-              if (uiVariantType && item.quantity > 0) {
-                userQuantities[uiVariantType] = item.quantity;
-              }
-            });
-
-            // Fetch all available variants for this card from the variant engine
-            try {
-              const variantResponse = await fetch('/api/variants/engine', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  mode: 'single',
-                  card: {
-                    set_id: card.id,
-                    set_name: card.name,
-                    number: card.number,
-                    rarity: card.rarity,
-                    sets: {
-                      set_id: set.id,
-                      set_series: set.name || 'Unknown',
-                      releaseDate: set.release_date || '2023/01/01'
-                    }
-                  },
-                  includeUserQuantities: false
-                })
-              });
-
-              let allVariants: UIVariant[] = [];
-              
-              if (variantResponse.ok) {
-                const variantData = await variantResponse.json();
-                
-                // Create variants with user quantities applied
-                allVariants = variantData.data.variants.map((variant: any) => ({
-                  type: variant.type as UIVariantType,
-                  userQuantity: userQuantities[variant.type as UIVariantType] || 0,
-                  customVariantData: variant.customVariantData
-                }));
-              } else {
-                // Fallback: create basic variants with user quantities
-                const allUIVariantTypes: UIVariantType[] = ['normal', 'holo', 'reverse_holo_standard'];
-                allVariants = allUIVariantTypes.map(type => ({
-                  type,
-                  userQuantity: userQuantities[type] || 0
-                }));
-              }
-
-              const totalOwned = Object.values(userQuantities).reduce((sum, qty) => sum + qty, 0);
-
-              // Include all cards that have any collection entries, regardless of current quantities
-              const collectionCard: CollectionCard = {
-                id: card.id,
-                name: card.name,
-                number: card.number,
-                rarity: card.rarity,
-                types: card.types,
-                hp: card.hp ? parseInt(card.hp, 10) : undefined,
-                supertype: card.supertype,
-                setId: set.id,
-                setName: set.name,
-                variants: allVariants,
-                userQuantities,
-                totalOwned,
-                images: card.images || {}
-              };
-  
-              processedCards.push(collectionCard);
-            } catch (variantError) {
-              console.error(`Error fetching variants for card ${cardId}:`, variantError);
-              
-              // Fallback: create basic variants with user quantities
-              const basicVariants: UIVariant[] = Object.entries(userQuantities)
-                .map(([variantType, quantity]) => ({
-                  type: variantType as UIVariantType,
-                  userQuantity: quantity
-                }));
-
-              const totalOwned = Object.values(userQuantities).reduce((sum, qty) => sum + (qty || 0), 0);
-
-              if (totalOwned > 0) {
-                const collectionCard: CollectionCard = {
-                  id: card.id,
-                  name: card.name,
-                  number: card.number,
-                  rarity: card.rarity,
-                  types: card.types,
-                  hp: card.hp ? parseInt(card.hp, 10) : undefined,
-                  supertype: card.supertype,
-                  setId: set.id,
-                  setName: set.name,
-                  variants: basicVariants,
-                  userQuantities,
-                  totalOwned,
-                  images: card.images || {}
-                };
-    
-                processedCards.push(collectionCard);
-              }
-            }
-          } catch (error) {
-            console.error(`Error processing card ${cardId}:`, error);
-          }
+        if (!result.success) {
+          throw new Error(result.error || 'Failed to fetch collection');
         }
 
-        setCollectionCards(processedCards);
+        console.log(`[COLLECTION] Loaded in ${result.data.metadata?.processingTimeMs}ms (fast mode: ${result.data.metadata?.fast})`);
+        setCollectionCards(result.data.cards || []);
       } catch (error) {
         console.error('Error fetching collection:', error);
+        setCollectionCards([]);
       } finally {
         setLoading(false);
       }
@@ -229,146 +106,26 @@ export function CollectionWithVariants({
     fetchCollection();
   }, [userId]);
 
-  // Simple refresh function to refetch collection data
+  // Simple refresh function using ultra-fast endpoint
   const refreshCollection = useCallback(async () => {
     try {
-      const collectionData = await getUserCollectionWithDetails(userId);
+      const response = await fetch('/api/collection/fast');
       
-      if (collectionData.length === 0) {
-        setCollectionCards([]);
-        return;
+      if (!response.ok) {
+        throw new Error(`Collection API error: ${response.status}`);
       }
 
-      // Group by card ID and aggregate quantities
-      const cardGroups = new Map<string, any[]>();
-      collectionData.forEach((item: any) => {
-        const cardId = item.card_id;
-        const existing = cardGroups.get(cardId) || [];
-        existing.push(item);
-        cardGroups.set(cardId, existing);
-      });
-
-      // Process each card group and fetch all available variants
-      const processedCards: CollectionCard[] = [];
+      const result = await response.json();
       
-      for (const [cardId, items] of Array.from(cardGroups.entries())) {
-        try {
-          const firstItem = items[0];
-          const card = firstItem.card;
-          const set = card.set;
-
-          // Calculate user quantities for each variant
-          const userQuantities: Partial<Record<UIVariantType, number>> = {};
-          items.forEach((item: any) => {
-            // Map database variant to UI variant type
-            const uiVariantType = mapDBVariantToUIVariant(item.variant);
-            if (uiVariantType && item.quantity > 0) {
-              userQuantities[uiVariantType] = item.quantity;
-            }
-          });
-
-          // Fetch all available variants for this card from the variant engine
-          try {
-            const variantResponse = await fetch('/api/variants/engine', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                mode: 'single',
-                card: {
-                  set_id: card.id,
-                  set_name: card.name,
-                  number: card.number,
-                  rarity: card.rarity,
-                  sets: {
-                    set_id: set.id,
-                    set_series: set.name || 'Unknown',
-                    releaseDate: set.release_date || '2023/01/01'
-                  }
-                },
-                includeUserQuantities: false
-              })
-            });
-
-            let allVariants: UIVariant[] = [];
-            
-            if (variantResponse.ok) {
-              const variantData = await variantResponse.json();
-              
-              // Create variants with user quantities applied
-              allVariants = variantData.data.variants.map((variant: any) => ({
-                type: variant.type as UIVariantType,
-                userQuantity: userQuantities[variant.type as UIVariantType] || 0,
-                customVariantData: variant.customVariantData
-              }));
-            } else {
-              // Fallback: create basic variants with user quantities
-              const allUIVariantTypes: UIVariantType[] = ['normal', 'holo', 'reverse_holo_standard'];
-              allVariants = allUIVariantTypes.map(type => ({
-                type,
-                userQuantity: userQuantities[type] || 0
-              }));
-            }
-
-            const totalOwned = Object.values(userQuantities).reduce((sum, qty) => sum + (qty || 0), 0);
-
-            // Include all cards that have any collection entries, regardless of current quantities
-            const collectionCard: CollectionCard = {
-              id: card.id,
-              name: card.name,
-              number: card.number,
-              rarity: card.rarity,
-              types: card.types,
-              hp: card.hp ? parseInt(card.hp, 10) : undefined,
-              supertype: card.supertype,
-              setId: set.id,
-              setName: set.name,
-              variants: allVariants,
-              userQuantities,
-              totalOwned,
-              images: card.images || {}
-            };
-
-            processedCards.push(collectionCard);
-          } catch (variantError) {
-            console.error(`Error fetching variants for card ${cardId}:`, variantError);
-            
-            // Fallback: create basic variants with user quantities
-            const basicVariants: UIVariant[] = Object.entries(userQuantities)
-              .map(([variantType, quantity]) => ({
-                type: variantType as UIVariantType,
-                userQuantity: quantity || 0
-              }));
-
-            const totalOwned = Object.values(userQuantities).reduce((sum, qty) => sum + (qty || 0), 0);
-
-            if (totalOwned > 0) {
-              const collectionCard: CollectionCard = {
-                id: card.id,
-                name: card.name,
-                number: card.number,
-                rarity: card.rarity,
-                types: card.types,
-                hp: card.hp ? parseInt(card.hp, 10) : undefined,
-                supertype: card.supertype,
-                setId: set.id,
-                setName: set.name,
-                variants: basicVariants,
-                userQuantities,
-                totalOwned,
-                images: card.images || {}
-              };
-  
-              processedCards.push(collectionCard);
-            }
-          }
-        } catch (error) {
-          console.error(`Error processing card ${cardId}:`, error);
-        }
+      if (!result.success) {
+        throw new Error(result.error || 'Failed to refresh collection');
       }
 
-      setCollectionCards(processedCards);
+      console.log(`[COLLECTION REFRESH] Refreshed in ${result.data.metadata?.processingTimeMs}ms`);
+      setCollectionCards(result.data.cards || []);
     } catch (error) {
       console.error('Error refreshing collection:', error);
+      // Don't clear the cards on refresh error to maintain UX
     }
   }, [userId]);
 

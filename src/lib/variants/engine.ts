@@ -444,6 +444,39 @@ async function getCustomVariants(cardId: string): Promise<CustomCardVariant[]> {
 }
 
 /**
+ * Fetch custom variants for multiple cards in bulk (optimized)
+ */
+async function getBulkCustomVariants(cardIds: string[]): Promise<Map<string, CustomCardVariant[]>> {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from('custom_card_variants')
+      .select('*')
+      .in('card_id', cardIds)
+      .eq('is_active', true);
+
+    if (error) {
+      console.error('Error fetching bulk custom variants:', error);
+      return new Map();
+    }
+
+    const customVariantsByCard = new Map<string, CustomCardVariant[]>();
+    
+    (data || []).forEach((variant: CustomCardVariant) => {
+      const cardId = variant.card_id;
+      const existing = customVariantsByCard.get(cardId) || [];
+      existing.push(variant);
+      customVariantsByCard.set(cardId, existing);
+    });
+
+    return customVariantsByCard;
+  } catch (error) {
+    console.error('Error fetching bulk custom variants:', error);
+    return new Map();
+  }
+}
+
+/**
  * Fetch disabled standard variants for a card from the database
  */
 async function getDisabledStandardVariants(cardId: string): Promise<string[]> {
@@ -613,11 +646,22 @@ export async function generateVariantsForSet(
   const errors: Array<{ cardId: string; error: string }> = [];
   
   try {
-    // Process cards in parallel
+    // Bulk fetch custom variants for all cards to avoid N+1 queries
+    const cardIds = cards.map(card => card.set_id);
+    const bulkCustomVariants = await getBulkCustomVariants(cardIds);
+    
+    // Process cards in parallel with bulk-fetched custom variants
     const promises = cards.map(async (card) => {
       try {
         const userQuantities = userCollectionData?.get(card.set_id);
-        const result = await generateVariantsForCard({ card, userQuantities });
+        const customVariants = bulkCustomVariants.get(card.set_id) || [];
+        
+        // Generate variants without individual database calls
+        const result = await generateVariantsForCardWithCustom({
+          card,
+          userQuantities,
+          customVariants
+        });
         results.set(card.set_id, result);
       } catch (error) {
         errors.push({
@@ -654,6 +698,69 @@ export async function generateVariantsForSet(
         cardId: 'SET_ERROR',
         error: error instanceof Error ? error.message : 'Unknown set error'
       }]
+    };
+  }
+}
+
+/**
+ * Generate variants for a single card with pre-fetched custom variants (optimized for bulk operations)
+ */
+async function generateVariantsForCardWithCustom(
+  input: VariantEngineInput & { customVariants?: CustomCardVariant[] }
+): Promise<VariantEngineOutput> {
+  const { card, customVariants = [] } = input;
+  
+  try {
+    // Step 1: Detect era
+    const era = detectEra(card);
+    
+    // Step 2: Apply hard rules (pricing data)
+    const hardRuleVariants = applyHardRules(card);
+    
+    // Step 3: Apply era rules
+    const eraRuleVariants = applyEraRules(card, era);
+    
+    // Step 4: Merge variants (hard rules take precedence)
+    const standardVariants = applyRulePrecedence(hardRuleVariants, eraRuleVariants);
+    
+    // Step 5: Use pre-fetched custom variants (no database call!)
+    
+    // Step 6: Apply custom variant rules (replace/exclude standard variants)
+    const { finalStandardVariants, appliedCustomVariants, appliedExceptions } =
+      applyCustomVariantRules(standardVariants, customVariants);
+    
+    // Step 7: Convert to UIVariants and add user quantities
+    const uiVariants = convertToUIVariants(
+      finalStandardVariants,
+      appliedCustomVariants,
+      input.userQuantities
+    );
+    
+    // Step 8: Sort variants by order preference
+    const sortedVariants = sortVariantsByOrder(uiVariants);
+    
+    return {
+      variants: sortedVariants,
+      metadata: {
+        source: Object.keys(hardRuleVariants).length > 0 ? 'tcgplayer' : 'policy',
+        appliedExceptions,
+        customVariantCount: appliedCustomVariants.length
+      }
+    };
+    
+  } catch (error) {
+    console.error(`Error generating variants for card ${card.set_id}:`, error);
+    
+    // Fallback: return normal variant only
+    return {
+      variants: [{
+        type: 'normal',
+        userQuantity: input.userQuantities?.normal || 0
+      }],
+      metadata: {
+        source: 'policy',
+        appliedExceptions: []
+      }
     };
   }
 }
