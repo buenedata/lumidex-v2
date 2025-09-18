@@ -7,6 +7,7 @@ import { SetFilters } from './SetFilters';
 import { SetSorting, type SortConfig } from './SetSorting';
 import { MasterSetToggle, MasterSetInfo } from './MasterSetToggle';
 import { ResetCollectionDialog } from './ResetCollectionDialog';
+import { SetProgressBar } from './SetProgressBar';
 import { Button } from '@/components/ui/Button';
 import { Panel } from '@/components/ui/Panel';
 import { useSetCollection, type FilterType } from '@/hooks/use-set-collection';
@@ -764,12 +765,27 @@ export function SetCardsWithFilters({
 
           {/* Filters */}
           <div className="space-y-4">
-            <SetFilters
-              activeFilter={activeFilter}
-              onFilterChange={setActiveFilter}
-              counts={filterCounts}
-              disabled={setCollection.isLoadingCollection}
-            />
+            <div className="flex flex-col lg:flex-row lg:items-start gap-4">
+              <div className="flex-1">
+                <SetFilters
+                  activeFilter={activeFilter}
+                  onFilterChange={setActiveFilter}
+                  counts={filterCounts}
+                  disabled={setCollection.isLoadingCollection}
+                />
+              </div>
+              
+              {/* Progress Bar - placed to the right of filters */}
+              <div className="lg:w-80 lg:flex-shrink-0">
+                <SetProgressBar
+                  percentage={filterCounts.all > 0 ? Math.round((filterCounts.have / filterCounts.all) * 100) : 0}
+                  collectedCards={filterCounts.have}
+                  totalCards={filterCounts.all}
+                  isMasterSet={setCollection.isMasterSet}
+                  size="sm"
+                />
+              </div>
+            </div>
             
             <SetSorting
               sortConfig={sortConfig}
