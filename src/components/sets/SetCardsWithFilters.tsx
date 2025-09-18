@@ -112,29 +112,29 @@ export function SetCardsWithFilters({
     const { cardStatuses, totalCards } = setCollection;
     const { isMasterSet } = setCollection;
     
-    const haveCount = cardStatuses.filter(status => 
+    const haveCount = cardStatuses.filter(status =>
       isMasterSet ? status.hasAllVariants : status.hasAnyVariant
     ).length;
     
     const needCount = totalCards - haveCount;
-    const duplicatesCount = cardStatuses.filter(status => 
+    const duplicatesCount = cardStatuses.filter(status =>
       status.duplicateVariants.length > 0
     ).length;
 
-    const counts = {
+    return {
       all: totalCards,
       have: haveCount,
       need: needCount,
       duplicates: duplicatesCount,
     };
-    
-    // Emit filter counts to parent component
+  }, [setCollection]);
+
+  // Emit filter counts to parent component when they change
+  useEffect(() => {
     if (onFilterCountsChange) {
-      onFilterCountsChange(counts);
+      onFilterCountsChange(filterCounts);
     }
-    
-    return counts;
-  }, [setCollection, onFilterCountsChange]);
+  }, [filterCounts, onFilterCountsChange]);
 
   // Get filtered and sorted cards with completion status
   const filteredAndSortedCards = useMemo(() => {
