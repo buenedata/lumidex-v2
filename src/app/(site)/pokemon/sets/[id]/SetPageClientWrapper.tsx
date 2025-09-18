@@ -304,7 +304,7 @@ function SetHeader({
                   </div>
                   
                   {/* Progress Bar - placed in left column below set info */}
-                  <div className="mt-6">
+                  <div className="mt-6 max-w-sm">
                     <SetProgressBar
                       percentage={filterCounts.all > 0 ? Math.round((filterCounts.have / filterCounts.all) * 100) : 0}
                       collectedCards={filterCounts.have}
