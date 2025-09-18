@@ -142,7 +142,7 @@ function applyHardRules(card: VariantEngineInput['card']): Partial<Record<string
  * Check if card is Pokemon (not Trainer or Energy)
  */
 function isPokemonCard(card: VariantEngineInput['card']): boolean {
-  const pokemonRarities = ['Common', 'Uncommon', 'Rare', 'Rare Holo', 'Double Rare', 'Ultra Rare', 'Illustration Rare', 'Special Illustration Rare'];
+  const pokemonRarities = ['Common', 'Uncommon', 'Rare', 'Rare Holo', 'Double Rare', 'Ultra Rare', 'Illustration Rare', 'Special Illustration Rare', 'Hyper Rare'];
   const trainerEnergyRarities = ['Trainer', 'Special Energy', 'Basic Energy'];
   
   if (trainerEnergyRarities.some(rarity => card.rarity.includes(rarity))) {
@@ -158,10 +158,10 @@ function isPokemonCard(card: VariantEngineInput['card']): boolean {
  */
 function isUltraRare(rarity: string): boolean {
   const ultraRarePatterns = [
-    "EX", "GX", "V", "VMAX", "VSTAR", "ex", 
+    "EX", "GX", "V", "VMAX", "VSTAR", "ex",
     "Secret", "Gold", "Rainbow", "Special Illustration",
     "Illustration Rare", "Full Art", "Alt Art", "Ultra Rare",
-    "Double Rare", "LEGEND", "Prime", "LV.X", "BREAK"
+    "Double Rare", "Hyper Rare", "LEGEND", "Prime", "LV.X", "BREAK"
   ];
   
   return ultraRarePatterns.some(pattern => rarity.includes(pattern));
