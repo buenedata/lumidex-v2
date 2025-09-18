@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { SetCardsWithFilters, type SetPriceStats } from '@/components/sets/SetCardsWithFilters';
 import { MasterSetToggle } from '@/components/sets/MasterSetToggle';
 import { ResetCollectionDialog } from '@/components/sets/ResetCollectionDialog';
+import { SetProgressBar } from '@/components/sets/SetProgressBar';
 import { Panel } from '@/components/ui/Panel';
 import { formatDate } from '@/lib/utils';
 import { useSetCollection } from '@/hooks/use-set-collection';
@@ -29,6 +30,7 @@ export function SetPageClientWrapper({
   const [priceStats, setPriceStats] = useState<SetPriceStats | null>(null);
   const [showMasterSetInfo, setShowMasterSetInfo] = useState(false);
   const [showResetDialog, setShowResetDialog] = useState(false);
+  const [filterCounts, setFilterCounts] = useState({ all: 0, have: 0, need: 0, duplicates: 0 });
 
   // Normalize cards for the set collection hook
   const normalizedCards = cards.map(card => ({
@@ -109,6 +111,7 @@ export function SetPageClientWrapper({
         showMasterSetInfo={showMasterSetInfo}
         setShowMasterSetInfo={setShowMasterSetInfo}
         setShowResetDialog={setShowResetDialog}
+        filterCounts={filterCounts}
       />
       
       {/* Master Set Info */}
@@ -172,6 +175,7 @@ export function SetPageClientWrapper({
         priceSource={userPreferences?.preferred_price_source}
         userCurrency={userPreferences?.preferred_currency}
         onPriceStatsChange={setPriceStats}
+        onFilterCountsChange={setFilterCounts}
         hideCollectionToggle={true}
       />
 
@@ -201,7 +205,8 @@ function SetHeader({
   formatPrice,
   showMasterSetInfo,
   setShowMasterSetInfo,
-  setShowResetDialog
+  setShowResetDialog,
+  filterCounts
 }: {
   set: TCGSet;
   cardsCount: number;
@@ -213,6 +218,7 @@ function SetHeader({
   showMasterSetInfo: boolean;
   setShowMasterSetInfo: (show: boolean) => void;
   setShowResetDialog: (show: boolean) => void;
+  filterCounts: { all: number; have: number; need: number; duplicates: number };
 }) {
   const releaseDate = set.release_date
     ? formatDate(set.release_date)
@@ -297,6 +303,17 @@ function SetHeader({
                     </div>
                   </div>
                   
+                </div>
+
+                {/* Progress Bar - placed in set header */}
+                <div className="mt-6">
+                  <SetProgressBar
+                    percentage={filterCounts.all > 0 ? Math.round((filterCounts.have / filterCounts.all) * 100) : 0}
+                    collectedCards={filterCounts.have}
+                    totalCards={filterCounts.all}
+                    isMasterSet={setCollection.isMasterSet}
+                    size="md"
+                  />
                 </div>
 
                 {/* Right Side Info Boxes */}

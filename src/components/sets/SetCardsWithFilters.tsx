@@ -41,6 +41,7 @@ interface SetCardsWithFiltersProps {
   priceSource?: PriceSource;
   userCurrency?: CurrencyCode;
   onPriceStatsChange?: (stats: SetPriceStats | null) => void;
+  onFilterCountsChange?: (counts: { all: number; have: number; need: number; duplicates: number }) => void;
   hideCollectionToggle?: boolean;
 }
 
@@ -59,6 +60,7 @@ export function SetCardsWithFilters({
   priceSource = 'cardmarket',
   userCurrency,
   onPriceStatsChange,
+  onFilterCountsChange,
   hideCollectionToggle = false
 }: SetCardsWithFiltersProps) {
   // Set global bulk mode flag IMMEDIATELY to prevent any individual API calls
@@ -119,13 +121,20 @@ export function SetCardsWithFilters({
       status.duplicateVariants.length > 0
     ).length;
 
-    return {
+    const counts = {
       all: totalCards,
       have: haveCount,
       need: needCount,
       duplicates: duplicatesCount,
     };
-  }, [setCollection]);
+    
+    // Emit filter counts to parent component
+    if (onFilterCountsChange) {
+      onFilterCountsChange(counts);
+    }
+    
+    return counts;
+  }, [setCollection, onFilterCountsChange]);
 
   // Get filtered and sorted cards with completion status
   const filteredAndSortedCards = useMemo(() => {
@@ -784,27 +793,12 @@ export function SetCardsWithFilters({
 
           {/* Filters */}
           <div className="space-y-4">
-            <div className="flex flex-col lg:flex-row lg:items-start gap-4">
-              <div className="flex-1">
-                <SetFilters
-                  activeFilter={activeFilter}
-                  onFilterChange={setActiveFilter}
-                  counts={filterCounts}
-                  disabled={setCollection.isLoadingCollection}
-                />
-              </div>
-              
-              {/* Progress Bar - placed to the right of filters */}
-              <div className="lg:w-80 lg:flex-shrink-0">
-                <SetProgressBar
-                  percentage={filterCounts.all > 0 ? Math.round((filterCounts.have / filterCounts.all) * 100) : 0}
-                  collectedCards={filterCounts.have}
-                  totalCards={filterCounts.all}
-                  isMasterSet={setCollection.isMasterSet}
-                  size="sm"
-                />
-              </div>
-            </div>
+            <SetFilters
+              activeFilter={activeFilter}
+              onFilterChange={setActiveFilter}
+              counts={filterCounts}
+              disabled={setCollection.isLoadingCollection}
+            />
             
             <div className="flex flex-col sm:flex-row sm:items-center gap-4">
               <SetSorting
