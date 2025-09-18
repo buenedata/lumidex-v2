@@ -303,17 +303,17 @@ function SetHeader({
                     </div>
                   </div>
                   
-                </div>
-
-                {/* Progress Bar - placed in set header */}
-                <div className="mt-6">
-                  <SetProgressBar
-                    percentage={filterCounts.all > 0 ? Math.round((filterCounts.have / filterCounts.all) * 100) : 0}
-                    collectedCards={filterCounts.have}
-                    totalCards={filterCounts.all}
-                    isMasterSet={setCollection.isMasterSet}
-                    size="md"
-                  />
+                  {/* Progress Bar - placed in left column below set info */}
+                  <div className="mt-6">
+                    <SetProgressBar
+                      percentage={filterCounts.all > 0 ? Math.round((filterCounts.have / filterCounts.all) * 100) : 0}
+                      collectedCards={filterCounts.have}
+                      totalCards={filterCounts.all}
+                      isMasterSet={setCollection.isMasterSet}
+                      size="md"
+                    />
+                  </div>
+                  
                 </div>
 
                 {/* Right Side Info Boxes */}
