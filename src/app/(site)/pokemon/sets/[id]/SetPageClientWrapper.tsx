@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { SetCardsWithFilters, type SetPriceStats } from '@/components/sets/SetCardsWithFilters';
 import { MasterSetToggle } from '@/components/sets/MasterSetToggle';
 import { ResetCollectionDialog } from '@/components/sets/ResetCollectionDialog';
+import { CompactSetProgressBar } from '@/components/sets/SetProgressBar';
 import { Panel } from '@/components/ui/Panel';
 import { formatDate } from '@/lib/utils';
 import { useSetCollection } from '@/hooks/use-set-collection';
@@ -302,6 +303,16 @@ function SetHeader({
                 {/* Right Side Info Boxes */}
                 <div className="mt-6 lg:mt-0 flex-shrink-0">
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 min-w-[200px]">
+                    {/* Progress Bar */}
+                    <div className="bg-panel2 rounded-xl p-4 shadow-soft">
+                      <CompactSetProgressBar
+                        percentage={setCollection.completionPercentage}
+                        collectedCards={setCollection.collectedCards}
+                        totalCards={setCollection.totalCards}
+                        isMasterSet={setCollection.isMasterSet}
+                      />
+                    </div>
+                    
                     {/* Most Expensive Card */}
                     <div className="bg-panel2 rounded-xl p-4 shadow-soft">
                       <div className="text-center">
