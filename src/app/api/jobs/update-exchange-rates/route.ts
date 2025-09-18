@@ -12,11 +12,13 @@ import { updateExchangeRates, healthCheckExchangeRates } from '@/lib/jobs/update
 
 export async function POST(request: NextRequest) {
   try {
-    // Optional: Add authentication/authorization here
-    // const authHeader = request.headers.get('authorization');
-    // if (!isAuthorized(authHeader)) {
-    //   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    // }
+    // Add basic authentication for production security
+    const authHeader = request.headers.get('authorization');
+    const expectedAuth = process.env.CRON_SECRET || process.env.SUPABASE_SERVICE_ROLE_KEY;
+    
+    if (!expectedAuth || authHeader !== `Bearer ${expectedAuth}`) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
 
     console.log('Exchange rate update job triggered via API');
     

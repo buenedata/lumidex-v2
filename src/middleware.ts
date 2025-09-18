@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 
-const ADMIN_EMAIL = 'kbbuene@gmail.com';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({
@@ -44,7 +44,7 @@ export async function middleware(request: NextRequest) {
       }
       
       // Check if user is admin
-      if (user.email !== ADMIN_EMAIL) {
+      if (!ADMIN_EMAIL || user.email !== ADMIN_EMAIL) {
         // Redirect non-admin users to home page
         return NextResponse.redirect(new URL('/', request.url));
       }
