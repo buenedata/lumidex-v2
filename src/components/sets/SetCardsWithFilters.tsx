@@ -78,6 +78,7 @@ export function SetCardsWithFilters({
   const [variantError, setVariantError] = useState<string | null>(null);
   const [refreshingCards, setRefreshingCards] = useState(new Set<string>());
   const [sortConfig, setSortConfig] = useState<SortConfig>({ field: null, direction: 'asc' });
+  const [searchTerm, setSearchTerm] = useState<string>('');
   // Initialize with empty object to immediately signal bulk mode to useSetCollection
   const [userQuantities, setUserQuantities] = useState<Record<string, Record<string, number>>>({});
   const [quantitiesLoading, setQuantitiesLoading] = useState(true);
@@ -130,8 +131,8 @@ export function SetCardsWithFilters({
   const filteredAndSortedCards = useMemo(() => {
     const { cardStatuses, isMasterSet } = setCollection;
     
-    // First apply filtering
-    const filtered = cards.filter((card, index) => {
+    // First apply collection status filtering
+    const statusFiltered = cards.filter((card, index) => {
       const status = cardStatuses[index];
       if (!status) return false;
 
@@ -149,14 +150,32 @@ export function SetCardsWithFilters({
       }
     });
 
-    // Then apply sorting - merge with price data for sorting
-    const cardsWithPricesForSorting = filtered.map(card => {
+    // Then apply search filtering
+    const searchFiltered = searchTerm.trim() === '' ? statusFiltered : statusFiltered.filter(card => {
+      const term = searchTerm.toLowerCase().trim();
+      
+      // Search by card name
+      const nameMatch = card.name.toLowerCase().includes(term);
+      
+      // Search by card number (extract numeric part for better matching)
+      const cardNumber = card.number.toLowerCase();
+      const numberMatch = cardNumber.includes(term);
+      
+      // Also try to match just the numeric part (e.g., searching "23" should find "023", "23/100", etc.)
+      const numericPart = card.number.match(/(\d+)/);
+      const numericMatch = numericPart && numericPart[1] === term;
+      
+      return nameMatch || numberMatch || numericMatch;
+    });
+
+    // Finally apply sorting - merge with price data for sorting
+    const cardsWithPricesForSorting = searchFiltered.map(card => {
       const cardWithPrices = cardsWithPrices.find(c => c.id === card.id) || card;
       return cardWithPrices;
     });
 
     return sortCards(cardsWithPricesForSorting, sortConfig.field, sortConfig.direction);
-  }, [cards, setCollection, activeFilter, sortConfig, cardsWithPrices]);
+  }, [cards, setCollection, activeFilter, sortConfig, cardsWithPrices, searchTerm]);
 
   // Calculate completion status for each card - more reactive to userQuantities changes
   const getCardCompletionStatus = useCallback((cardId: string): CardCompletionStatus => {
@@ -787,11 +806,39 @@ export function SetCardsWithFilters({
               </div>
             </div>
             
-            <SetSorting
-              sortConfig={sortConfig}
-              onSortChange={setSortConfig}
-              disabled={setCollection.isLoadingCollection || pricesLoading || variantsLoading}
-            />
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <SetSorting
+                sortConfig={sortConfig}
+                onSortChange={setSortConfig}
+                disabled={setCollection.isLoadingCollection || pricesLoading || variantsLoading}
+              />
+              
+              {/* Search Input */}
+              <div className="relative sm:w-64">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <svg className="h-4 w-4 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Search cards..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="block w-full pl-10 pr-3 py-2 border border-border rounded-md bg-panel text-text placeholder-muted focus:outline-none focus:ring-2 focus:ring-brand2 focus:border-transparent text-sm"
+                />
+                {searchTerm && (
+                  <button
+                    onClick={() => setSearchTerm('')}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  >
+                    <svg className="h-4 w-4 text-muted hover:text-text" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </Panel>
